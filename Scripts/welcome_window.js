@@ -17,7 +17,7 @@ function getWelcomePages() {
                     </div>
                     <div class="welcome_window_content">
                         <div class="welcome_profile_card">
-                            <img src="Images/Favicon.svg" alt="Dev Logo" class="welcome_profile_avatar">
+                            <img src="Images/pixel_coder_cat.jpg" alt="Dev Logo" class="welcome_profile_avatar">
                             <div class="welcome_profile_details">
                                 <input type="text" id="devNameInput" class="welcome_profile_name_input" value="${escapeWelcomeHTML(savedDevName)}" placeholder="Your Name">
                                 <input type="text" id="devTitleInput" class="welcome_profile_title_input" value="${escapeWelcomeHTML(savedDevTitle)}" placeholder="Your Title">

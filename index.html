@@ -629,29 +629,35 @@
                     </div>
                 </div>
                 <div id="catWidget" class="window cat_widget" style="display: flex;">
+                    <div class="stat_widget_header">
+                        <span class="stat_widget_title">SYSTEM METRICS</span>
+                        <span class="stat_status_dot">● ONLINE</span>
+                    </div>
                     <div class="dev_widget_top">
-                        <div id="catImageContainer" class="cat_image_container" title="Click Rubber Duck for debugging tips!">
-                            <img class="cat_image" src="Images/duck.svg" alt="Dev Duck">
+                        <div id="catImageContainer" class="cat_image_container" title="Developer Status &amp; Advice">
+                            <img class="cat_image" src="Images/pixel_coder_cat.jpg" alt="Developer Avatar">
                         </div>
-                        <div id="duckSpeechBubble" class="dev_widget_bubble">
-                            Duck: Click me for debugging wisdom! 🦆
+                        <div id="duckSpeechBubble" class="dev_widget_bubble" title="Click for developer tip">
+                            💡 Tip: Premature optimization is the root of all evil. Profile first.
                         </div>
                     </div>
                     <div class="dev_widget_stats">
                         <div class="dev_stat_row">
-                            <span id="cpuText">CPU: 24%</span>
-                            <div class="dev_stat_bar_bg">
-                                <div id="cpuBarFill" class="dev_stat_bar_fill" style="width: 24%;"></div>
-                            </div>
+                            <span>CPU Usage</span>
+                            <span id="cpuText">22% (8 Cores)</span>
                         </div>
-                        <div class="dev_stat_row">
-                            <span id="ramText">RAM: 48%</span>
-                            <div class="dev_stat_bar_bg">
-                                <div id="ramBarFill" class="dev_stat_bar_fill" style="width: 48%; background: linear-gradient(90deg, #00f2fe, #4facfe);"></div>
-                            </div>
+                        <div class="dev_stat_bar_bg">
+                            <div id="cpuBarFill" class="dev_stat_bar_fill" style="width: 22%;"></div>
+                        </div>
+                        <div class="dev_stat_row" style="margin-top: 0.4vmin;">
+                            <span>Memory (Active)</span>
+                            <span id="ramText">4.2 GB / 16 GB</span>
+                        </div>
+                        <div class="dev_stat_bar_bg">
+                            <div id="ramBarFill" class="dev_stat_bar_fill mem" style="width: 28%;"></div>
                         </div>
                     </div>
-                    <audio id="catMeowSound" src="Audio/click.wav"></audio>
+                    <audio id="catMeowSound" src="Audio/click.wav" preload="none"></audio>
                 </div>
                 <div id="calendarWidget" class="window calendar_widget" style="width: 20vmin; height: 23vmin; display: flex;">
                     <div class="calendar_top_bar">
@@ -684,6 +690,7 @@
                 </div>
             </div>
         </div>
+        <script src="Scripts/cyber_audio.js"></script>
         <script src="Scripts/script.js"></script>
         <script src="Scripts/code_studio.js"></script>
         <script src="Scripts/dev_tools.js"></script>

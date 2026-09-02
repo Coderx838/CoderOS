@@ -58,47 +58,47 @@ body, div, h1, h2, p, span, a, input {
 }
 
 body {
-    --loading-bg: linear-gradient(135deg, #0d2420, #122a28);
-    --loading-accent-start: #2e9970;
-    --loading-accent-end: #5ab898;
-    --loading-glow: rgba(46, 153, 112, 0.6);
-    --loading-text-color: #5ab898;
+    --loading-bg: linear-gradient(135deg, #090d16, #0f172a);
+    --loading-accent-start: #6366f1;
+    --loading-accent-end: #38bdf8;
+    --loading-glow: rgba(99, 102, 241, 0.5);
+    --loading-text-color: #cbd5e1;
 
-    --bg-image: url("Images/Nature.png");
+    --bg-image: url("Images/pixel_hacker_room.jpg");
 
-    --topbar-bg: linear-gradient(90deg, rgba(26, 72, 80, 0.88), rgba(38, 108, 90, 0.80));
+    --topbar-bg: rgba(10, 14, 23, 0.75);
 
-    --window-bg: rgba(5, 20, 16, 0.58);
-    --window-saturate: 110%;
+    --window-bg: rgba(13, 17, 26, 0.82);
+    --window-saturate: 160%;
 
-    --window-header-bg: linear-gradient(135deg, #2e9970, #1a5e48);
-    --window-drag-glow: rgba(46, 153, 112, 0.9);
+    --window-header-bg: linear-gradient(180deg, rgba(30, 38, 56, 0.9), rgba(18, 24, 38, 0.9));
+    --window-drag-glow: rgba(99, 102, 241, 0.6);
 
-    --accent-start: #2e9970;
-    --accent-end: #1a6b50;
-    --accent-gradient: linear-gradient(135deg, #2e9970, #1a6b50);
+    --accent-start: #6366f1;
+    --accent-end: #38bdf8;
+    --accent-gradient: linear-gradient(135deg, #6366f1, #38bdf8);
 
-    --scrollbar-thumb: rgba(46, 153, 112, 0.65);
-    --scrollbar-thumb-hover: rgba(46, 153, 112, 0.90);
+    --scrollbar-thumb: rgba(255, 255, 255, 0.18);
+    --scrollbar-thumb-hover: rgba(255, 255, 255, 0.35);
 
-    --todo-border: rgba(46, 153, 112, 0.35);
-    --todo-task-border: rgba(46, 153, 112, 0.15);
-    --complete-hover-border: #38ef7d;
-    --complete-hover-bg: rgba(56, 239, 125, 0.2);
-    --todo-input-focus-border: #2e9970;
-    --todo-input-focus-shadow: 0 0 0.8vmin rgba(46, 153, 112, 0.4);
-    --todo-input-focus-bg: rgba(10, 40, 35, 0.4);
-    --todo-add-hover-shadow: rgba(26, 94, 72, 0.45);
+    --todo-border: rgba(99, 102, 241, 0.3);
+    --todo-task-border: rgba(255, 255, 255, 0.08);
+    --complete-hover-border: #38bdf8;
+    --complete-hover-bg: rgba(56, 189, 248, 0.15);
+    --todo-input-focus-border: #6366f1;
+    --todo-input-focus-shadow: 0 0 0.8vmin rgba(99, 102, 241, 0.35);
+    --todo-input-focus-bg: rgba(15, 23, 42, 0.6);
+    --todo-add-hover-shadow: rgba(99, 102, 241, 0.35);
 
-    --notes-selector-bg: linear-gradient(135deg, #2e9970, #1a5e48);
+    --notes-selector-bg: linear-gradient(135deg, #4f46e5, #0284c7);
 
-    --music-progress-bar-bg: rgba(46, 140, 108, 0.75);
-    --music-progress-fill: linear-gradient(135deg, #2e9970, #1a6b50);
+    --music-progress-bar-bg: rgba(30, 41, 59, 0.8);
+    --music-progress-fill: linear-gradient(135deg, #6366f1, #38bdf8);
 
-    --search-bg: linear-gradient(90deg, rgba(26, 72, 80, 0.88), rgba(38, 108, 90, 0.80));
+    --search-bg: rgba(15, 23, 42, 0.9);
 
-    --slider-accent: #2e9970;
-    --slider-moz-progress: linear-gradient(90deg, #2e9970, #1a6b50);
+    --slider-accent: #6366f1;
+    --slider-moz-progress: linear-gradient(90deg, #6366f1, #38bdf8);
 }
 
 body[data-theme="dark"] {
@@ -468,11 +468,11 @@ body[data-theme="dracula"] {
 
     width: 7vmin;
     aspect-ratio: 1 / 1;
-    border-radius: 1.5vmin;
-    margin: 0 1vmin;
+    border-radius: 1.4vmin;
+    margin: 0 0.8vmin;
 
-    background: rgba(255, 255, 255, 0.1);
-    border: 0.0625rem solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
     color: rgba(255, 255, 255, 0.95);
 
     font-size: 1.1vmin;
@@ -481,47 +481,59 @@ body[data-theme="dracula"] {
     letter-spacing: 0.05rem;
 
     transform: translateY(0) scale(1);
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    position: relative;
 }
 
 .app_icon:hover {
-    transform: translateY(-0.8vmin) scale(1.1);
-    background-color: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 1vmin 2vmin rgba(255, 255, 255, 0.15);
+    transform: translateY(-1vmin) scale(1.18);
+    background-color: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 1.2vmin 2.4vmin rgba(0, 0, 0, 0.4), 0 0 1.5vmin rgba(99, 102, 241, 0.3);
+}
+
+/* Active running dot under dock icon */
+.app_icon.app_running::after {
+    content: '';
+    position: absolute;
+    bottom: -0.4vmin;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0.45vmin;
+    height: 0.45vmin;
+    border-radius: 50%;
+    background: #38bdf8;
+    box-shadow: 0 0 0.6vmin #38bdf8;
 }
 
 .app_icon_svg {
-    width: 80%;
+    width: 76%;
     aspect-ratio: 1 / 1;
-
     filter: brightness(0) invert(1);
+    transition: transform 0.2s ease;
+}
+
+.app_icon:hover .app_icon_svg {
+    transform: scale(1.05);
 }
 
 @keyframes iconPop {
-    0% {
-        transform: translateY(-0.8vmin) scale(1.1);
-    }
-    40% {
-        transform: translateY(-1.8vmin) scale(1.3);
-    }
-    70% {
-        transform: translateY(-0.5vmin) scale(0.95);
-    }
-    100% {
-        transform: translateY(-0.8vmin) scale(1.1);
-    }
+    0% { transform: translateY(-0.8vmin) scale(1.1); }
+    40% { transform: translateY(-1.6vmin) scale(1.25); }
+    70% { transform: translateY(-0.6vmin) scale(0.96); }
+    100% { transform: translateY(-0.8vmin) scale(1.1); }
 }
 
 .icon_pop {
-    animation: iconPop 0.35s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    animation: iconPop 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 .icon_selected {
-    width: 9vmin;
+    width: 8.5vmin;
     margin: 0;
 }
 
+/* Real App Window Physics & Glassmorphism */
 .window {
     display: flex;
     flex-direction: column;
@@ -531,34 +543,52 @@ body[data-theme="dracula"] {
     left: 0;
 
     height: auto;
-    border-radius: 2vmin;
+    border-radius: 1.4vmin;
     overflow: hidden;
 
-    backdrop-filter: blur(1.25rem) saturate(var(--window-saturate));
+    backdrop-filter: blur(28px) saturate(var(--window-saturate));
     background-color: var(--window-bg);
-    border: 0.0625rem solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0.8vmin 3.2vmin 0 rgba(0, 0, 0, 0.3);
-    transition: width .25s ease, height .25s ease, transform .25s ease, box-shadow .25s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    transition: width .2s cubic-bezier(0.16, 1, 0.3, 1), height .2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .2s ease;
 
     opacity: 1;
-    --window-pop-scale: 1;
-    transform: scale(var(--window-pop-scale));
-    animation: zoomIn 0.2s ease forwards;
+    transform-origin: center center;
+    animation: appOpenSpring 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .window.window_closed {
-    animation: zoomIn 0.2s ease reverse forwards;
+    animation: appCloseSmooth 0.18s cubic-bezier(0.4, 0, 1, 1) forwards !important;
     pointer-events: none;
 }
 
-@keyframes zoomIn {
-    from {
+@keyframes appOpenSpring {
+    0% {
         opacity: 0;
-        --window-pop-scale: 0.9;
+        transform: scale(0.92) translateY(18px);
+        filter: blur(6px);
     }
-    to {
+    60% {
+        transform: scale(1.012) translateY(-2px);
+        filter: blur(0px);
+    }
+    100% {
         opacity: 1;
-        --window-pop-scale: 1;
+        transform: scale(1) translateY(0);
+        filter: blur(0px);
+    }
+}
+
+@keyframes appCloseSmooth {
+    0% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        filter: blur(0px);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.94) translateY(14px);
+        filter: blur(6px);
     }
 }
 

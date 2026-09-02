@@ -242,17 +242,21 @@ function updateIconsVisibility() {
 
 //open and close windows
 function closeWindow(element) {
+    if (!element) return;
     element.classList.add("window_closed");
+    if (window.cyberAudio) window.cyberAudio.playWindowClose();
     setTimeout(function () {
         element.style.display = "none";
         updateTopBarVisibility();
-        updateIconsVisibility();
+        updateDockIndicators();
         if (element.id === "terminal" && typeof terminalOpenClose === "function") {
             terminalOpenClose();
         }
-    }, 200);
+    }, 180);
 }
 function openWindow(element) {
+    if (!element) return;
+    if (window.cyberAudio) window.cyberAudio.playWindowOpen();
     if (!element.dataset.positioned) {
         element.style.display = "flex";
         void element.offsetWidth;
@@ -281,7 +285,7 @@ function openWindow(element) {
             clampWindowToViewport(element);
         }
     }
-    element.classList.add("window_closed")
+    element.classList.add("window_closed");
     element.style.display = "flex";
     void element.offsetWidth;
     element.classList.remove("window_closed");
@@ -293,7 +297,22 @@ function openWindow(element) {
         terminalOpenClose();
     }
     updateTopBarVisibility();
-    updateIconsVisibility();
+    updateDockIndicators();
+}
+
+function updateDockIndicators() {
+    const dockIcons = document.querySelectorAll(".app_icon");
+    dockIcons.forEach(icon => {
+        const winId = icon.dataset.window;
+        if (winId) {
+            const win = document.getElementById(winId);
+            if (win && win.style.display === "flex" && !win.classList.contains("window_closed")) {
+                icon.classList.add("app_running");
+            } else {
+                icon.classList.remove("app_running");
+            }
+        }
+    });
 }
 
 function setInitialPosition(element) {
