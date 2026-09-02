@@ -16,6 +16,23 @@ function setCatStroke(progressVal) {
     loadingScreenProgressBar.style.strokeDashoffset = offset;
 }
 
+function enterDesktop() {
+    if (enterDesktopButton) enterDesktopButton.classList.add("enter_desktop_button_pressed");
+    if (startMenu) {
+        startMenu.classList.add("start_menu_hide");
+        setTimeout(function () {
+            startMenu.style.display = "none";
+        }, 150);
+    }
+}
+
+function enterStartMenu() {
+    if (!startMenu) return;
+    startMenu.style.display = "flex";
+    void startMenu.offsetWidth;
+    startMenu.classList.remove("start_menu_hide");
+}
+
 function finishLoading() {
     if (isFinished) return;
     isFinished = true;
@@ -25,7 +42,7 @@ function finishLoading() {
     setCatStroke(100);
 
     if (loadingScreenProgressBar) {
-        loadingScreenProgressBar.style.transition = "stroke-dashoffset 0.25s ease-out";
+        loadingScreenProgressBar.style.transition = "stroke-dashoffset 0.2s ease-out";
     }
     if (loadingText) {
         loadingText.classList.add("no_animation");
@@ -37,59 +54,44 @@ function finishLoading() {
             loadingScreen.classList.add("loading_screen_hidden");
             setTimeout(function () {
                 loadingScreen.style.display = "none";
-            }, 350);
+            }, 300);
         }
-    }, 450);
+        // Transition straight into desktop
+        enterDesktop();
+    }, 400);
 }
 
-// Smooth animated loader that completes in ~1.2 seconds
+// Fast, smooth boot progress (completes in ~800ms)
 const loadingInterval = setInterval(function () {
     if (pageLoaded) return;
 
-    if (loadingProgress < 60) {
-        loadingProgress += 4;
-    } else if (loadingProgress < 90) {
-        loadingProgress += 2.5;
+    if (loadingProgress < 70) {
+        loadingProgress += 5;
     } else if (loadingProgress < 100) {
-        loadingProgress += 1.5;
+        loadingProgress += 3;
     } else {
         finishLoading();
         return;
     }
 
     setCatStroke(loadingProgress);
-}, 25);
+}, 20);
 
-function enterDesktop() {
-    enterDesktopButton.classList.add("enter_desktop_button_pressed");
-    startMenu.classList.add("start_menu_hide");
-    setTimeout(function () {
-        enterDesktopButton.classList.remove("enter_desktop_button_pressed");
-        startMenu.style.display = "none";
-    }, 200);
-}
-
-function enterStartMenu() {
-    startMenu.style.display = "flex";
-    void startMenu.offsetWidth;
-    startMenu.classList.remove("start_menu_hide");
-}
-
-// Allow user to click anywhere on loading screen to bypass
+// Allow clicking anywhere to skip boot instantly
 if (loadingScreen) {
     loadingScreen.addEventListener("click", finishLoading);
 }
 
-// Load event trigger
+// Window load triggers finish
 window.addEventListener("load", function () {
-    setTimeout(finishLoading, 400);
+    setTimeout(finishLoading, 200);
 });
 
-// Fallbacks: if already loaded or after guaranteed timeout
+// Guaranteed failsafe timeout
 if (document.readyState === "complete") {
-    setTimeout(finishLoading, 600);
+    setTimeout(finishLoading, 400);
 }
-setTimeout(finishLoading, 1800);
+setTimeout(finishLoading, 1000);
 
 if (enterDesktopButton) {
     enterDesktopButton.addEventListener("click", function () {
