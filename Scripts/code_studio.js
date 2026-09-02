@@ -229,7 +229,18 @@ function initCodeStudio() {
         });
     }
 
-    runStudioCode();
+    // Run automatically when window is opened for the first time
+    const studioWin = document.querySelector("#codeStudio");
+    if (studioWin) {
+        let firstRun = false;
+        const observer = new MutationObserver(() => {
+            if (studioWin.style.display === "flex" && !firstRun) {
+                firstRun = true;
+                setTimeout(runStudioCode, 100);
+            }
+        });
+        observer.observe(studioWin, { attributes: true, attributeFilter: ["style"] });
+    }
 }
 
 function printToConsole(msg, isError = false) {

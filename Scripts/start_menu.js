@@ -8,38 +8,57 @@ const loadingText = document.querySelector("#loadingText");
 let loadingProgress = 0;
 let pageLoaded = false;
 const totalPathLength = 280;
-
-let reached80 = false;
-let reached99 = false;
+let isFinished = false;
 
 function setCatStroke(progressVal) {
-    const offset = totalPathLength - (progressVal / 100) * totalPathLength;
+    if (!loadingScreenProgressBar) return;
+    const offset = totalPathLength - (Math.min(progressVal, 100) / 100) * totalPathLength;
     loadingScreenProgressBar.style.strokeDashoffset = offset;
 }
 
+function finishLoading() {
+    if (isFinished) return;
+    isFinished = true;
+    pageLoaded = true;
+    clearInterval(loadingInterval);
+    loadingProgress = 100;
+    setCatStroke(100);
+
+    if (loadingScreenProgressBar) {
+        loadingScreenProgressBar.style.transition = "stroke-dashoffset 0.25s ease-out";
+    }
+    if (loadingText) {
+        loadingText.classList.add("no_animation");
+        loadingText.innerHTML = "<span>C</span><span>o</span><span>d</span><span>e</span><span>r</span><span>O</span><span>S</span><span>&nbsp;</span><span>R</span><span>e</span><span>a</span><span>d</span><span>y</span><span>!</span>";
+    }
+
+    setTimeout(function () {
+        if (loadingScreen) {
+            loadingScreen.classList.add("loading_screen_hidden");
+            setTimeout(function () {
+                loadingScreen.style.display = "none";
+            }, 350);
+        }
+    }, 450);
+}
+
+// Smooth animated loader that completes in ~1.2 seconds
 const loadingInterval = setInterval(function () {
     if (pageLoaded) return;
 
-    if (loadingProgress < 80) {
-        loadingProgress += 1;
-    } else if (loadingProgress < 99 && loadingProgress >= 80) {
-        loadingProgress += 0.1;
-
-        if (!reached80) {
-            loadingText.innerHTML = "<span>F</span><span>i</span><span>n</span><span>a</span><span>l</span><span>i</span><span>z</span><span>i</span><span>n</span><span>g</span><span>.</span><span>.</span><span>.</span>";
-            reached80 = true;
-        }
-    } else if (loadingProgress >= 99) {
-        loadingProgress = 99;
-
-        if (!reached99) {
-            loadingText.innerHTML = "<span>A</span><span>l</span><span>m</span><span>o</span><span>s</span><span>t</span><span>&nbsp;</span><span>t</span><span>h</span><span>e</span><span>r</span><span>e</span><span>!</span>";
-            reached99 = true;
-        }
+    if (loadingProgress < 60) {
+        loadingProgress += 4;
+    } else if (loadingProgress < 90) {
+        loadingProgress += 2.5;
+    } else if (loadingProgress < 100) {
+        loadingProgress += 1.5;
+    } else {
+        finishLoading();
+        return;
     }
 
     setCatStroke(loadingProgress);
-}, 50);
+}, 25);
 
 function enterDesktop() {
     enterDesktopButton.classList.add("enter_desktop_button_pressed");
@@ -56,26 +75,24 @@ function enterStartMenu() {
     startMenu.classList.remove("start_menu_hide");
 }
 
+// Allow user to click anywhere on loading screen to bypass
+if (loadingScreen) {
+    loadingScreen.addEventListener("click", finishLoading);
+}
+
+// Load event trigger
 window.addEventListener("load", function () {
-    setTimeout(function () {
-        pageLoaded = true;
-        clearInterval(loadingInterval);
-        loadingScreenProgressBar.style.transition = "stroke-dashoffset 0.3s ease-out";
-        loadingText.classList.add("no_animation")
-        loadingText.innerHTML = "<span>C</span><span>o</span><span>d</span><span>e</span><span>r</span><span>O</span><span>S</span><span>&nbsp;</span><span>R</span><span>e</span><span>a</span><span>d</span><span>y</span><span>!</span>";
-
-        setTimeout(function () {
-            setCatStroke(100);
-        }, 10);
-        setTimeout(function () {
-            loadingScreen.classList.add("loading_screen_hidden");
-            setTimeout(function () {
-                loadingScreen.style.display = "none";
-            }, 400);
-        }, 800);
-    }, 2000);
+    setTimeout(finishLoading, 400);
 });
 
-enterDesktopButton.addEventListener("click", function () {
-    enterDesktop();
-});
+// Fallbacks: if already loaded or after guaranteed timeout
+if (document.readyState === "complete") {
+    setTimeout(finishLoading, 600);
+}
+setTimeout(finishLoading, 1800);
+
+if (enterDesktopButton) {
+    enterDesktopButton.addEventListener("click", function () {
+        enterDesktop();
+    });
+}
