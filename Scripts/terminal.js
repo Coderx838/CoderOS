@@ -522,7 +522,7 @@ async function runCommand(cmdString) {
                 if (typeof switchTheme === "function") switchTheme(args[0]);
                 output = `<p style="color: #10b981;">Theme updated to '${escapeHTML(args[0])}'.</p>`;
             } else {
-                output = `<p style="color: #64748b;">usage: theme &lt;dark|matrix|cyberpunk|dracula|day&gt;</p>`;
+                output = `<p style="color: #64748b;">usage: theme &lt;dark|tokyonight|catppuccin|nord|matrix|cyberpunk|dracula|day|purple|sunset|pink&gt;</p>`;
             }
             break;
 

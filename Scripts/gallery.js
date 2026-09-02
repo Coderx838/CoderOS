@@ -2,6 +2,21 @@ const galleryContentElement = document.querySelector("#galleryContent");
 
 const galleryImages = [
     {
+        src: "Images/tokyo_night_cyber.jpg",
+        alt: "Tokyo Cyber Rain",
+        caption: "Tokyo Cyber Rain (Hacker Ramen)"
+    },
+    {
+        src: "Images/lofi_coding_sunset.jpg",
+        alt: "Cozy Lofi Desk",
+        caption: "Cozy Lofi Coding Desk"
+    },
+    {
+        src: "Images/nordic_aurora_mountain.jpg",
+        alt: "Nordic Aurora Fjord",
+        caption: "Nordic Aurora Fjord"
+    },
+    {
         src: "Images/pixel_hacker_room.jpg",
         alt: "Cozy Hacker Room",
         caption: "Cozy Lofi Hacker Room (Pixel Art)"
@@ -20,6 +35,16 @@ const galleryImages = [
         src: "Images/Nature_Night.png",
         alt: "Midnight Mountains",
         caption: "Midnight Mountains"
+    },
+    {
+        src: "Images/Nature_Sunset.png",
+        alt: "Sunset Wilderness",
+        caption: "Sunset Wilderness"
+    },
+    {
+        src: "Images/Nature_Purple.png",
+        alt: "Neon Violet Valley",
+        caption: "Neon Violet Valley"
     },
     {
         src: "Images/Nature.png",

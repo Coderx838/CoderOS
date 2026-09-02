@@ -1,5 +1,8 @@
 const darkModeButton = document.querySelector("#darkModeButton");
 const lightModeButton = document.querySelector("#lightModeButton");
+const tokyoNightModeButton = document.querySelector("#tokyoNightModeButton");
+const catppuccinModeButton = document.querySelector("#catppuccinModeButton");
+const nordModeButton = document.querySelector("#nordModeButton");
 const dayModeButton = document.querySelector("#dayModeButton");
 const purpleModeButton = document.querySelector("#purpleModeButton");
 const sunsetModeButton = document.querySelector("#sunsetModeButton");
@@ -118,6 +121,30 @@ if (draculaModeButton) {
         switchTheme("dracula");
         draculaModeButton.classList.add("settings_button_clicking_animation");
         setTimeout(() => draculaModeButton.classList.remove("settings_button_clicking_animation"), 150);
+    });
+}
+
+if (tokyoNightModeButton) {
+    tokyoNightModeButton.addEventListener("click", function() {
+        switchTheme("tokyonight");
+        tokyoNightModeButton.classList.add("settings_button_clicking_animation");
+        setTimeout(() => tokyoNightModeButton.classList.remove("settings_button_clicking_animation"), 150);
+    });
+}
+
+if (catppuccinModeButton) {
+    catppuccinModeButton.addEventListener("click", function() {
+        switchTheme("catppuccin");
+        catppuccinModeButton.classList.add("settings_button_clicking_animation");
+        setTimeout(() => catppuccinModeButton.classList.remove("settings_button_clicking_animation"), 150);
+    });
+}
+
+if (nordModeButton) {
+    nordModeButton.addEventListener("click", function() {
+        switchTheme("nord");
+        nordModeButton.classList.add("settings_button_clicking_animation");
+        setTimeout(() => nordModeButton.classList.remove("settings_button_clicking_animation"), 150);
     });
 }
 

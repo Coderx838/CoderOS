@@ -132,6 +132,21 @@ body,html {
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3), 0 0 1vmin rgba(0, 242, 254, 0.4);
 }
 
+.tokyo_night_mode_button {
+    background: linear-gradient(135deg, #7aa2f7, #bb9af7);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25), 0 1vmin 3vmin rgba(0, 0, 0, 0.4);
+}
+
+.catppuccin_mode_button {
+    background: linear-gradient(135deg, #cba6f7, #f38ba8);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25), 0 1vmin 3vmin rgba(0, 0, 0, 0.4);
+}
+
+.nord_mode_button {
+    background: linear-gradient(135deg, #88c0d0, #5e81ac);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25), 0 1vmin 3vmin rgba(0, 0, 0, 0.4);
+}
+
 .dracula_mode_button {
     background: linear-gradient(135deg, #bd93f9, #50fa7b);
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2), 0 1vmin 3vmin rgba(0, 0, 0, 0.4);

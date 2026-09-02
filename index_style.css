@@ -365,6 +365,105 @@ body[data-theme="dracula"] {
     --complete-hover-bg: rgba(80, 250, 123, 0.2);
 }
 
+body[data-theme="tokyonight"] {
+    --loading-bg: linear-gradient(135deg, #16161e, #1a1b26);
+    --loading-accent-start: #7aa2f7;
+    --loading-accent-end: #bb9af7;
+    --loading-glow: rgba(122, 162, 247, 0.6);
+    --loading-text-color: #7aa2f7;
+    --bg-image: url("Images/tokyo_night_cyber.jpg");
+    --topbar-bg: linear-gradient(90deg, rgba(26, 27, 38, 0.95), rgba(22, 22, 30, 0.95));
+    --window-bg: rgba(26, 27, 38, 0.85);
+    --window-saturate: 120%;
+    --window-header-bg: linear-gradient(135deg, #7aa2f7, #bb9af7);
+    --window-drag-glow: rgba(122, 162, 247, 0.85);
+    --accent-start: #7aa2f7;
+    --accent-end: #bb9af7;
+    --accent-gradient: linear-gradient(135deg, #7aa2f7, #bb9af7);
+    --scrollbar-thumb: rgba(122, 162, 247, 0.5);
+    --scrollbar-thumb-hover: rgba(187, 154, 247, 0.8);
+    --todo-border: rgba(122, 162, 247, 0.35);
+    --todo-task-border: rgba(187, 154, 247, 0.2);
+    --todo-input-focus-border: #7aa2f7;
+    --todo-input-focus-shadow: 0 0 0.8vmin rgba(122, 162, 247, 0.5);
+    --todo-input-focus-bg: rgba(22, 22, 30, 0.7);
+    --todo-add-hover-shadow: rgba(122, 162, 247, 0.4);
+    --notes-selector-bg: linear-gradient(135deg, #7aa2f7, #3d59a1);
+    --music-progress-bar-bg: rgba(61, 89, 161, 0.75);
+    --music-progress-fill: linear-gradient(135deg, #7aa2f7, #7dcfff);
+    --search-bg: linear-gradient(90deg, rgba(26, 27, 38, 0.95), rgba(22, 22, 30, 0.95));
+    --slider-accent: #7aa2f7;
+    --slider-moz-progress: linear-gradient(90deg, #7aa2f7, #7dcfff);
+    --complete-hover-border: #73daca;
+    --complete-hover-bg: rgba(115, 218, 202, 0.2);
+}
+
+body[data-theme="catppuccin"] {
+    --loading-bg: linear-gradient(135deg, #11111b, #181825);
+    --loading-accent-start: #cba6f7;
+    --loading-accent-end: #f38ba8;
+    --loading-glow: rgba(203, 166, 247, 0.6);
+    --loading-text-color: #cba6f7;
+    --bg-image: url("Images/lofi_coding_sunset.jpg");
+    --topbar-bg: linear-gradient(90deg, rgba(24, 24, 37, 0.95), rgba(17, 17, 27, 0.95));
+    --window-bg: rgba(30, 30, 46, 0.85);
+    --window-saturate: 115%;
+    --window-header-bg: linear-gradient(135deg, #cba6f7, #f38ba8);
+    --window-drag-glow: rgba(203, 166, 247, 0.85);
+    --accent-start: #cba6f7;
+    --accent-end: #89b4fa;
+    --accent-gradient: linear-gradient(135deg, #cba6f7, #89b4fa);
+    --scrollbar-thumb: rgba(203, 166, 247, 0.5);
+    --scrollbar-thumb-hover: rgba(137, 180, 250, 0.8);
+    --todo-border: rgba(203, 166, 247, 0.35);
+    --todo-task-border: rgba(137, 180, 250, 0.2);
+    --todo-input-focus-border: #cba6f7;
+    --todo-input-focus-shadow: 0 0 0.8vmin rgba(203, 166, 247, 0.5);
+    --todo-input-focus-bg: rgba(17, 17, 27, 0.7);
+    --todo-add-hover-shadow: rgba(203, 166, 247, 0.4);
+    --notes-selector-bg: linear-gradient(135deg, #cba6f7, #585b70);
+    --music-progress-bar-bg: rgba(88, 91, 112, 0.75);
+    --music-progress-fill: linear-gradient(135deg, #cba6f7, #fab387);
+    --search-bg: linear-gradient(90deg, rgba(24, 24, 37, 0.95), rgba(17, 17, 27, 0.95));
+    --slider-accent: #cba6f7;
+    --slider-moz-progress: linear-gradient(90deg, #cba6f7, #a6e3a1);
+    --complete-hover-border: #a6e3a1;
+    --complete-hover-bg: rgba(166, 227, 161, 0.2);
+}
+
+body[data-theme="nord"] {
+    --loading-bg: linear-gradient(135deg, #242933, #2e3440);
+    --loading-accent-start: #88c0d0;
+    --loading-accent-end: #81a1c1;
+    --loading-glow: rgba(136, 192, 208, 0.6);
+    --loading-text-color: #88c0d0;
+    --bg-image: url("Images/nordic_aurora_mountain.jpg");
+    --topbar-bg: linear-gradient(90deg, rgba(46, 52, 64, 0.95), rgba(36, 41, 51, 0.95));
+    --window-bg: rgba(46, 52, 64, 0.85);
+    --window-saturate: 110%;
+    --window-header-bg: linear-gradient(135deg, #88c0d0, #5e81ac);
+    --window-drag-glow: rgba(136, 192, 208, 0.85);
+    --accent-start: #88c0d0;
+    --accent-end: #81a1c1;
+    --accent-gradient: linear-gradient(135deg, #88c0d0, #81a1c1);
+    --scrollbar-thumb: rgba(136, 192, 208, 0.5);
+    --scrollbar-thumb-hover: rgba(129, 161, 193, 0.8);
+    --todo-border: rgba(136, 192, 208, 0.35);
+    --todo-task-border: rgba(129, 161, 193, 0.2);
+    --todo-input-focus-border: #88c0d0;
+    --todo-input-focus-shadow: 0 0 0.8vmin rgba(136, 192, 208, 0.5);
+    --todo-input-focus-bg: rgba(36, 41, 51, 0.7);
+    --todo-add-hover-shadow: rgba(136, 192, 208, 0.4);
+    --notes-selector-bg: linear-gradient(135deg, #88c0d0, #434c5e);
+    --music-progress-bar-bg: rgba(67, 76, 94, 0.75);
+    --music-progress-fill: linear-gradient(135deg, #88c0d0, #a3be8c);
+    --search-bg: linear-gradient(90deg, rgba(46, 52, 64, 0.95), rgba(36, 41, 51, 0.95));
+    --slider-accent: #88c0d0;
+    --slider-moz-progress: linear-gradient(90deg, #88c0d0, #a3be8c);
+    --complete-hover-border: #a3be8c;
+    --complete-hover-bg: rgba(163, 190, 140, 0.2);
+}
+
 #matrixOverlayCanvas {
     position: fixed;
     top: 0;
