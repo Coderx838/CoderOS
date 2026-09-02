@@ -180,21 +180,38 @@
                             </div>
                             <div class="code_studio_actions">
                                 <select id="codeStudioTemplate" class="code_studio_select" title="Preset Templates">
-                                    <option value="particles">⚡ Particles</option>
-                                    <option value="matrix">⚡ Matrix Rain</option>
-                                    <option value="clock">⚡ Neon Clock</option>
-                                    <option value="blank">⚡ Blank</option>
+                                    <option value="snake">🎮 Retro Snake Arcade</option>
+                                    <option value="particles">✨ Particle Network</option>
+                                    <option value="clock">✨ Neon Clock</option>
+                                    <option value="blank">📄 Blank Canvas</option>
                                 </select>
+                                <button id="codeStudioFormatBtn" class="code_studio_btn" title="Format Code">🪄 Format</button>
+                                <button id="codeStudioExportBtn" class="code_studio_btn" title="Export HTML Bundle">📥 Export</button>
                                 <button id="codeStudioSaveBtn" class="code_studio_btn" title="Save Code">💾 Save</button>
                                 <button id="codeStudioRunBtn" class="code_studio_btn run_btn" title="Run Code">▶ Run</button>
                             </div>
                         </div>
                         <div class="code_studio_main">
                             <div class="code_studio_editor_pane">
-                                <textarea id="codeStudioEditor" class="code_studio_textarea" spellcheck="false" placeholder="Write code here..."></textarea>
+                                <div class="code_studio_editor_wrapper">
+                                    <div id="codeStudioGutter" class="code_studio_gutter">1</div>
+                                    <textarea id="codeStudioEditor" class="code_studio_textarea" spellcheck="false" placeholder="Write code here..."></textarea>
+                                </div>
+                                <div class="code_studio_statusbar">
+                                    <span id="codeStudioCursorPos">Ln 1, Col 1</span>
+                                    <span id="codeStudioStats">0 lines • 0 chars</span>
+                                    <span class="status_tag">UTF-8</span>
+                                </div>
                             </div>
                             <div class="code_studio_preview_pane">
-                                <iframe id="codeStudioPreview" class="code_studio_preview_iframe" sandbox="allow-scripts allow-modals allow-same-origin"></iframe>
+                                <div class="preview_device_bar">
+                                    <button class="preview_device_btn active" data-device="full">🖥️ Desktop</button>
+                                    <button class="preview_device_btn" data-device="mobile">📱 Mobile (375px)</button>
+                                    <button id="codeStudioPopoutBtn" class="preview_device_btn" title="Open Preview in Tab">↗ Popout</button>
+                                </div>
+                                <div class="preview_frame_wrapper">
+                                    <iframe id="codeStudioPreview" class="code_studio_preview_iframe" sandbox="allow-scripts allow-modals allow-same-origin"></iframe>
+                                </div>
                             </div>
                         </div>
                         <div id="codeStudioConsole" class="code_studio_console">
@@ -378,6 +395,11 @@
                             <div id="terminalMaximizeButton" class="maximize_button clickable no_select"></div>
                         </div>
                         <h2 class="header_title no_select">Terminal</h2>
+                        <div class="terminal_header_tools">
+                            <button class="term_tool_btn" onclick="termZoomOut()" title="Decrease font size">A-</button>
+                            <button class="term_tool_btn" onclick="termZoomReset()" title="Reset font size">14px</button>
+                            <button class="term_tool_btn" onclick="termZoomIn()" title="Increase font size">A+</button>
+                        </div>
                     </div>
                     <div id="terminalContent" class="window_content terminal_window_content hide_scrollbar" style="display: flex; flex-direction: column; justify-content: flex-start"></div>
                 </div>
@@ -430,26 +452,83 @@
                         <div class="header_buttons">
                             <div id="closeMusicPlayerWindow" class="close_button clickable no_select"></div>
                         </div>
-                        <h2 class="header_title no_select">Music Player</h2>
+                        <h2 class="header_title no_select">YouTube Music &amp; Radio</h2>
                     </div>
                     <div id="musicPlayerContent" class="music_player_content hide_scrollbar">
-                        <img id="musicPlayerImage" class="music_player_image music_player_no_image" src="Images/no_music.svg" alt="No song played">
-                        <div id="musicPlayerSongTitle" class="music_player_song_title no_select"></div>
-                        <div class="music_player_progress_bar">
-                            <div id="musicPlayerProgress" class="music_player_progress"></div>
+                        <!-- Navigation tabs -->
+                        <div class="music_nav_tabs">
+                            <div class="music_nav_tab active" data-tab="stream">📻 Live Radios</div>
+                            <div class="music_nav_tab" data-tab="custom">🔍 Custom URL</div>
+                            <div class="music_nav_tab" data-tab="local">🎵 Local Audio</div>
                         </div>
-                        <div class="music_player_controls">
-                            <div id="musicPlayerPreviousButton" class="music_player_previous_button clickable no_select">
-                                <i class="material-icons music_player_previous_button_icon no_select">skip_previous</i>
-                            </div>
-                            <div id="musicPlayerPlayPauseButton" class="music_player_play_pause_button clickable no_select">
-                                <i class="material-icons music_player_play_pause_button_icon no_select">pause</i>
-                            </div>
-                            <div id="musicPlayerNextButton" class="music_player_next_button clickable no_select">
-                                <i class="material-icons music_player_next_button_icon no_select">skip_next</i>
+
+                        <!-- Hero Now Playing Card -->
+                        <div class="player_hero_card">
+                            <img id="musicPlayerImage" class="player_album_art" src="Images/pixel_hacker_room.jpg" alt="Artwork">
+                            <div class="player_hero_details">
+                                <div id="musicPlayerSongTitle" class="player_hero_title">Lofi Girl (Live Stream)</div>
+                                <div id="musicPlayerChannel" class="player_hero_channel">beats to relax/study to</div>
+                                <div class="player_hero_status">
+                                    <div id="equalizerBars" class="equalizer_bars eq_active">
+                                        <div class="eq_bar"></div>
+                                        <div class="eq_bar"></div>
+                                        <div class="eq_bar"></div>
+                                        <div class="eq_bar"></div>
+                                    </div>
+                                    <span id="playerStatusText">STREAMING</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="music_player_playlist hide_scrollbar" id="musicPlayerPlaylist"></div>
+
+                        <!-- Embedded Stream Player Frame -->
+                        <div id="ytStreamContainer" class="yt_stream_frame_container">
+                            <iframe id="ytPlayerFrame" class="yt_stream_iframe" src="https://www.youtube-nocookie.com/embed/jfKfPfyJRdk?autoplay=1&enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+
+                        <!-- Custom URL Search Row (visible in custom tab) -->
+                        <div id="customUrlRow" class="music_url_bar_row" style="display: none;">
+                            <input type="text" id="customMusicUrl" class="music_url_input" placeholder="Paste YouTube or YT Music URL or Video ID...">
+                            <button id="playCustomUrlBtn" class="music_url_play_btn">▶ Play</button>
+                        </div>
+
+                        <!-- Radio Station Selection Grid -->
+                        <div id="radioStationList" class="radio_station_grid">
+                            <div class="radio_station_card active" data-vid="jfKfPfyJRdk" data-title="Lofi Girl (Live Stream)" data-channel="Lofi Girl">
+                                <span class="radio_station_icon">☕</span>
+                                <div class="radio_station_info">
+                                    <div class="radio_station_name">Lofi Girl Radio</div>
+                                    <div class="radio_station_sub">beats to relax/study to</div>
+                                </div>
+                                <span class="radio_station_badge">LIVE</span>
+                            </div>
+                            <div class="radio_station_card" data-vid="4xDzrJKXOOY" data-title="Synthwave Radio" data-channel="Lofi Girl / Synthwave">
+                                <span class="radio_station_icon">🌆</span>
+                                <div class="radio_station_info">
+                                    <div class="radio_station_name">Synthwave Chill</div>
+                                    <div class="radio_station_sub">Retro cyber coding beats</div>
+                                </div>
+                                <span class="radio_station_badge">LIVE</span>
+                            </div>
+                            <div class="radio_station_card" data-vid="5qap5aO4i9A" data-title="Coffee Shop Ambience &amp; Lofi" data-channel="Lofi Coffee Ambience">
+                                <span class="radio_station_icon">🌧️</span>
+                                <div class="radio_station_info">
+                                    <div class="radio_station_name">Rain &amp; Coffee Shop</div>
+                                    <div class="radio_station_sub">Deep focus coding vibes</div>
+                                </div>
+                                <span class="radio_station_badge">FOCUS</span>
+                            </div>
+                            <div class="radio_station_card" data-vid="1fueZCTYkpA" data-title="Chiptune &amp; 8-Bit Chill" data-channel="Chiptune Dev">
+                                <span class="radio_station_icon">🕹️</span>
+                                <div class="radio_station_info">
+                                    <div class="radio_station_name">8-Bit Chiptune Radio</div>
+                                    <div class="radio_station_sub">Retro video game lofi</div>
+                                </div>
+                                <span class="radio_station_badge">RETRO</span>
+                            </div>
+                        </div>
+
+                        <!-- Local Playlist -->
+                        <div class="music_player_playlist hide_scrollbar" id="musicPlayerPlaylist" style="display: none;"></div>
                     </div>
                 </div>
                 <div id="gallery" class="window gallery">

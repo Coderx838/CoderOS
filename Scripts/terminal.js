@@ -1,9 +1,31 @@
 // CoderOS Pro Terminal (CoderShell v2.0 - Real UNIX Workstation Shell)
 const terminalWindow = document.querySelector("#terminal");
+const terminalContent = document.querySelector("#terminalContent");
 
 let commandHistory = JSON.parse(localStorage.getItem("coderOS_term_history") || "[]");
 let historyIndex = commandHistory.length;
 const termBootTime = Date.now();
+let currentTermFontSize = parseInt(localStorage.getItem("coderOS_term_font_size") || "14", 10);
+
+function applyTermFontSize(size) {
+    currentTermFontSize = Math.min(Math.max(size, 11), 24);
+    localStorage.setItem("coderOS_term_font_size", currentTermFontSize);
+    const content = document.querySelector("#terminalContent");
+    if (content) {
+        content.style.fontSize = `${currentTermFontSize}px`;
+    }
+}
+
+window.termZoomIn = () => applyTermFontSize(currentTermFontSize + 2);
+window.termZoomOut = () => applyTermFontSize(currentTermFontSize - 2);
+window.termZoomReset = () => applyTermFontSize(14);
+
+if (terminalWindow) {
+    terminalWindow.addEventListener("click", () => {
+        const inp = document.querySelector("#terminalInput");
+        if (inp) inp.focus();
+    });
+}
 
 // Virtual Filesystem
 let virtualFS = {

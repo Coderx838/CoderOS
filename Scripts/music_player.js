@@ -1,121 +1,143 @@
-const musicPlayerImage = document.querySelector("#musicPlayerImage");
+// CoderOS YouTube Music & Streaming Station Player
+
+const ytPlayerFrame = document.querySelector("#ytPlayerFrame");
 const musicPlayerTitle = document.querySelector("#musicPlayerSongTitle");
-const musicPlayerProgress = document.querySelector("#musicPlayerProgress");
-const musicPlayerBackButton = document.querySelector("#musicPlayerPreviousButton");
-const musicPlayerPlayPauseButton = document.querySelector("#musicPlayerPlayPauseButton");
-const musicPlayerNextButton = document.querySelector("#musicPlayerNextButton");
+const musicPlayerChannel = document.querySelector("#musicPlayerChannel");
+const playerStatusText = document.querySelector("#playerStatusText");
+const equalizerBars = document.querySelector("#equalizerBars");
+const customUrlInput = document.querySelector("#customMusicUrl");
+const playCustomUrlBtn = document.querySelector("#playCustomUrlBtn");
+const navTabs = document.querySelectorAll(".music_nav_tab");
+const customUrlRow = document.querySelector("#customUrlRow");
+const radioStationList = document.querySelector("#radioStationList");
 const musicPlayerPlaylist = document.querySelector("#musicPlayerPlaylist");
+const ytStreamContainer = document.querySelector("#ytStreamContainer");
 
-const playlist = [
-    {title: "Bloody Stream", audioSrc: "Audio/Bloody_Stream.mp3", imgSrc: "Images/Bloody_Stream.jpg"},
-    {title: "Canzoni Preferite", audioSrc: "Audio/Canzoni_Preferite.mp3", imgSrc: "Images/Canzoni_Preferite.jpg"},
-    {title: "Hungarian Dance no.5", audioSrc: "Audio/Hungarian_Dance.mp3", imgSrc: "Images/Hungarian_Dance.jpg"}
-]
-
-let currentSongIndex = null;
 let currentAudio = null;
 
-function loadSongs() {
-    playlist.forEach((song, index) => {
-        const songElement = document.createElement("div");
-        songElement.classList.add("song_element");
-        songElement.classList.add("hide_scrollbar");
-        songElement.innerHTML = `
-            <div class="song_info">
-                <div class="song_image">
-                    <img class="song_image_src" src="${song.imgSrc}" alt="No image found">
-                </div>
-                <div class="song hide_scrollbar" data-index="${index}">${song.title}</div>
-            </div>
-            <div class="song_play">
-                <div id="songPlayButton${index}" class="song_play_button clickable">
-                    <i class="material-icons song_play_button_icon no_select">play_arrow</i>
-                </div>
-            </div>
-        `;
-        const songPlayButton = songElement.querySelector(`#songPlayButton${index}`);
-        songPlayButton.addEventListener("click", function () {
-            playSong(index);
-            musicPlayerPlayPauseButton.innerHTML = `<i class="material-icons music_player_play_pause_button_icon no_select">pause</i>`;
-            songPlayButton.classList.add("music_player_button_press");
-            setTimeout(function () {
-                songPlayButton.classList.remove("music_player_button_press");
-            }, 150);
+// Navigation Tabs
+if (navTabs) {
+    navTabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+            navTabs.forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
+
+            const mode = tab.dataset.tab;
+            if (mode === "stream") {
+                if (ytStreamContainer) ytStreamContainer.style.display = "block";
+                if (customUrlRow) customUrlRow.style.display = "none";
+                if (radioStationList) radioStationList.style.display = "flex";
+                if (musicPlayerPlaylist) musicPlayerPlaylist.style.display = "none";
+            } else if (mode === "custom") {
+                if (ytStreamContainer) ytStreamContainer.style.display = "block";
+                if (customUrlRow) customUrlRow.style.display = "flex";
+                if (radioStationList) radioStationList.style.display = "none";
+                if (musicPlayerPlaylist) musicPlayerPlaylist.style.display = "none";
+            } else if (mode === "local") {
+                if (ytStreamContainer) ytStreamContainer.style.display = "none";
+                if (customUrlRow) customUrlRow.style.display = "none";
+                if (radioStationList) radioStationList.style.display = "none";
+                if (musicPlayerPlaylist) musicPlayerPlaylist.style.display = "flex";
+            }
         });
-        musicPlayerPlaylist.appendChild(songElement);
     });
 }
 
-function playSong(index) {
-    const song = playlist[index];
+// Radio Station Cards
+const stationCards = document.querySelectorAll(".radio_station_card");
+if (stationCards) {
+    stationCards.forEach(card => {
+        card.addEventListener("click", () => {
+            stationCards.forEach(c => c.classList.remove("active"));
+            card.classList.add("active");
+
+            const vid = card.dataset.vid;
+            const title = card.dataset.title;
+            const channel = card.dataset.channel;
+
+            playYouTubeVideo(vid, title, channel);
+        });
+    });
+}
+
+function playYouTubeVideo(videoId, title, channel) {
     if (currentAudio) {
         currentAudio.pause();
-        currentAudio.currentTime = 0;
     }
 
-    currentSongIndex = index;
-    currentAudio = new Audio(song.audioSrc);
-    applyGlobalVolume(currentAudio);
-    currentAudio.play();
-    musicPlayerImage.src = song.imgSrc;
-    if (musicPlayerImage.classList.contains("music_player_no_image")) {
-        musicPlayerImage.classList.remove("music_player_no_image");
+    if (ytPlayerFrame) {
+        ytPlayerFrame.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&enablejsapi=1`;
     }
-    musicPlayerTitle.innerText = song.title;
+
+    if (musicPlayerTitle) musicPlayerTitle.textContent = title || "YouTube Stream";
+    if (musicPlayerChannel) musicPlayerChannel.textContent = channel || "Live Audio Stream";
+    if (playerStatusText) playerStatusText.textContent = "STREAMING";
+    if (equalizerBars) equalizerBars.classList.add("eq_active");
 }
 
-function PlayPauseSong() {
-    if (!currentAudio) return;
-    if (currentAudio.paused) {
-        currentAudio.play();
-        musicPlayerPlayPauseButton.innerHTML = `<i class="material-icons music_player_play_pause_button_icon no_select">pause</i>`;
+function extractYouTubeID(url) {
+    if (!url) return null;
+    const trimmed = url.trim();
+    if (trimmed.length === 11 && !trimmed.includes("/")) return trimmed;
+
+    const regExp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/|music\.youtube\.com\/watch\?v=)([^"&?\/\s]{11})/i;
+    const match = trimmed.match(regExp);
+    return match ? match[1] : null;
+}
+
+if (playCustomUrlBtn && customUrlInput) {
+    playCustomUrlBtn.addEventListener("click", handleCustomPlay);
+    customUrlInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") handleCustomPlay();
+    });
+}
+
+function handleCustomPlay() {
+    const val = customUrlInput.value.trim();
+    if (!val) return;
+    const vid = extractYouTubeID(val);
+    if (vid) {
+        playYouTubeVideo(vid, "Custom YouTube Track", "User Stream");
+        customUrlInput.value = "";
     } else {
-        currentAudio.pause();
-        musicPlayerPlayPauseButton.innerHTML = `<i class="material-icons music_player_play_pause_button_icon no_select">play_arrow</i>`;
+        alert("Please enter a valid YouTube or YouTube Music URL or 11-character video ID.");
     }
 }
 
-function nextSong() {
-    if (currentSongIndex === null) return;
-    const nextIndex = (currentSongIndex + 1) % playlist.length;
-    playSong(nextIndex);
+// Local Audio Tracks support
+const localTracks = [
+    { title: "Bloody Stream", audioSrc: "Audio/Bloody_Stream.mp3", imgSrc: "Images/Bloody_Stream.jpg" },
+    { title: "Canzoni Preferite", audioSrc: "Audio/Canzoni_Preferite.mp3", imgSrc: "Images/Canzoni_Preferite.jpg" },
+    { title: "Hungarian Dance no.5", audioSrc: "Audio/Hungarian_Dance.mp3", imgSrc: "Images/Hungarian_Dance.jpg" }
+];
+
+function loadLocalTracks() {
+    if (!musicPlayerPlaylist) return;
+    musicPlayerPlaylist.innerHTML = "";
+    localTracks.forEach((track, index) => {
+        const row = document.createElement("div");
+        row.className = "radio_station_card";
+        row.style.margin = "4px 0";
+        row.innerHTML = `
+            <span class="radio_station_icon">🎵</span>
+            <div class="radio_station_info">
+                <div class="radio_station_name">${track.title}</div>
+                <div class="radio_station_sub">Local Audio File</div>
+            </div>
+            <span class="radio_station_badge">MP3</span>
+        `;
+        row.addEventListener("click", () => {
+            if (ytPlayerFrame) ytPlayerFrame.src = "";
+            if (currentAudio) currentAudio.pause();
+            currentAudio = new Audio(track.audioSrc);
+            currentAudio.play().catch(() => {});
+            if (musicPlayerTitle) musicPlayerTitle.textContent = track.title;
+            if (musicPlayerChannel) musicPlayerChannel.textContent = "Local Workstation Audio";
+            if (playerStatusText) playerStatusText.textContent = "PLAYING";
+            if (equalizerBars) equalizerBars.classList.add("eq_active");
+        });
+        musicPlayerPlaylist.appendChild(row);
+    });
 }
 
-function previousSong() {
-    if (currentSongIndex === null) return;
-    const previousIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
-    playSong(previousIndex);
-}
-
-function updateProgressBar() {
-    if (!currentAudio) return;
-    const progress = (currentAudio.currentTime / currentAudio.duration) * 100;
-    musicPlayerProgress.style.width = `${progress}%`;
-}
-
-setInterval(updateProgressBar, 500);
-
-musicPlayerBackButton.addEventListener("click", function () {
-    previousSong();
-    musicPlayerBackButton.classList.add("music_player_button_press");
-    setTimeout(function () {
-        musicPlayerBackButton.classList.remove("music_player_button_press");
-    }, 150);
-});
-
-musicPlayerPlayPauseButton.addEventListener("click", function () {
-    PlayPauseSong();
-    musicPlayerPlayPauseButton.classList.add("music_player_button_press");
-    setTimeout(function () {
-        musicPlayerPlayPauseButton.classList.remove("music_player_button_press");
-    }, 150);
-});
-musicPlayerNextButton.addEventListener("click", function () {
-    nextSong();
-    musicPlayerNextButton.classList.add("music_player_button_press");
-    setTimeout(function () {
-        musicPlayerNextButton.classList.remove("music_player_button_press");
-    }, 150);
-});
-
-loadSongs();
+loadLocalTracks();

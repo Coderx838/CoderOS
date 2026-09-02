@@ -1,18 +1,20 @@
-/* CoderOS Developer System Metrics Widget (Clean macOS iStat / Stats Style) */
+/* CoderOS Developer System Metrics Widget (Crisp, High-Legibility iStat Style) */
 .cat_widget {
-    height: 18vmin;
-    width: 24vmin !important;
-    top: 7vmin;
-    left: 2.5vmin;
-    background: rgba(13, 17, 26, 0.78);
-    backdrop-filter: blur(24px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    height: 21vmin;
+    min-height: 190px;
+    width: 29vmin !important;
+    min-width: 280px !important;
+    top: 6.5vmin;
+    left: 2vmin;
+    background: rgba(13, 17, 26, 0.88);
+    backdrop-filter: blur(28px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 1.4vmin;
-    padding: 1.2vmin;
+    padding: 1.2vmin 1.4vmin;
     display: flex;
     flex-direction: column;
-    gap: 0.8vmin;
-    box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    gap: 0.9vmin;
+    box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.05);
     user-select: none;
     font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
 }
@@ -26,7 +28,7 @@
 }
 
 .stat_widget_title {
-    font-size: 1.05vmin;
+    font-size: 12.5px;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -35,18 +37,18 @@
 }
 
 .stat_status_dot {
-    font-size: 0.95vmin;
+    font-size: 12px;
     color: #10b981;
     font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 0.4vmin;
+    gap: 4px;
 }
 
 .dev_widget_top {
     display: flex;
     align-items: center;
-    gap: 1vmin;
+    gap: 1.2vmin;
 }
 
 .cat_image_container {
@@ -54,10 +56,12 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    width: 4.8vmin;
-    height: 4.8vmin;
+    width: 5.2vmin;
+    height: 5.2vmin;
+    min-width: 46px;
+    min-height: 46px;
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 50%;
     overflow: hidden;
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
@@ -65,7 +69,7 @@
 }
 
 .cat_image_container:hover {
-    transform: scale(1.1);
+    transform: scale(1.08);
     border-color: #38bdf8;
 }
 
@@ -77,14 +81,14 @@
 
 .dev_widget_bubble {
     flex: 1;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 0.7vmin;
-    padding: 0.6vmin 0.8vmin;
-    font-size: 1.05vmin;
-    line-height: 1.35;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+    line-height: 1.45;
     color: #cbd5e1;
-    max-height: 5.5vmin;
+    max-height: 64px;
     overflow-y: auto;
     cursor: pointer;
     transition: background 0.15s ease, border-color 0.15s ease;
@@ -98,25 +102,26 @@
 .dev_widget_stats {
     display: flex;
     flex-direction: column;
-    gap: 0.6vmin;
+    gap: 0.8vmin;
 }
 
 .dev_stat_row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 1.05vmin;
-    color: #94a3b8;
-    font-family: 'Consolas', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: #cbd5e1;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Consolas', monospace;
 }
 
 .dev_stat_bar_bg {
     width: 100%;
-    height: 0.5vmin;
+    height: 7px;
     background: rgba(255, 255, 255, 0.08);
-    border-radius: 0.3vmin;
+    border-radius: 4px;
     overflow: hidden;
-    margin-top: 0.2vmin;
+    margin-top: 3px;
 }
 
 .dev_stat_bar_fill {
@@ -124,7 +129,7 @@
     background: linear-gradient(90deg, #6366f1, #38bdf8);
     width: 22%;
     transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    border-radius: 0.3vmin;
+    border-radius: 4px;
 }
 
 .dev_stat_bar_fill.mem {
@@ -137,6 +142,6 @@
 
 @keyframes catPressed {
     0% { transform: scale(1); }
-    50% { transform: scale(0.9); }
+    50% { transform: scale(0.92); }
     100% { transform: scale(1); }
 }
