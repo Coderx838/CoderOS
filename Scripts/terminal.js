@@ -1,6 +1,6 @@
 // CoderOS Pro Terminal (CoderShell v2.0 - Real UNIX Workstation Shell)
 const terminalWindow = document.querySelector("#terminal");
-const terminalContent = document.querySelector("#terminalContent");
+const termContentElem = document.querySelector("#terminalContent");
 
 let commandHistory = JSON.parse(localStorage.getItem("coderOS_term_history") || "[]");
 let historyIndex = commandHistory.length;
@@ -10,9 +10,8 @@ let currentTermFontSize = parseInt(localStorage.getItem("coderOS_term_font_size"
 function applyTermFontSize(size) {
     currentTermFontSize = Math.min(Math.max(size, 11), 24);
     localStorage.setItem("coderOS_term_font_size", currentTermFontSize);
-    const content = document.querySelector("#terminalContent");
-    if (content) {
-        content.style.fontSize = `${currentTermFontSize}px`;
+    if (termContentElem) {
+        termContentElem.style.fontSize = `${currentTermFontSize}px`;
     }
 }
 
@@ -99,27 +98,36 @@ function getPromptString() {
 }
 
 function scrollTerminalToBottom() {
-    if (!terminalContent) return;
-    terminalContent.scrollTop = terminalContent.scrollHeight;
+    if (!termContentElem) return;
+    termContentElem.scrollTop = termContentElem.scrollHeight;
 }
 
-new ResizeObserver(scrollTerminalToBottom).observe(terminalWindow);
+if (terminalWindow) {
+    new ResizeObserver(scrollTerminalToBottom).observe(terminalWindow);
+}
 
 function terminalOpenClose() {
-    if (terminalWindow.style.display === "flex") {
-        if (!terminalContent.innerHTML.trim() || terminalContent.innerHTML.includes("terminalText")) {
-            terminalContent.innerHTML = `
-                <div style="color: #64748b; margin-bottom: 0.8vmin; font-size: 1.1vmin; font-family: 'Consolas', monospace;">
+    const termWin = document.querySelector("#terminal");
+    const termContent = document.querySelector("#terminalContent");
+    if (!termWin || !termContent) return;
+
+    applyTermFontSize(currentTermFontSize);
+
+    if (termWin.style.display === "flex") {
+        if (!termContent.innerHTML.trim() || termContent.innerHTML.includes("terminalText")) {
+            termContent.innerHTML = `
+                <div style="color: #94a3b8; margin-bottom: 12px; font-size: inherit; font-family: inherit;">
                     CoderOS Workstation Shell • zsh 5.9 (x86_64-apple-darwin23.0)<br>
-                    Type <span style="color: #38bdf8;">'help'</span> for commands, or <span style="color: #10b981;">'neofetch'</span> for system specs.
+                    Type <span style="color: #38bdf8; font-weight: bold;">'help'</span> for commands, or <span style="color: #10b981; font-weight: bold;">'neofetch'</span> for system specs.
                 </div>
             `;
-            setTimeout(addInputLine, 100);
+            setTimeout(addInputLine, 60);
         } else {
-            setTimeout(addInputLine, 50);
+            setTimeout(addInputLine, 30);
         }
     }
 }
+window.terminalOpenClose = terminalOpenClose;
 
 function addInputLine() {
     const existing = document.querySelector("#terminalInputLine");
@@ -134,7 +142,8 @@ function addInputLine() {
             <input class="terminal_input" type="text" id="terminalInput" autofocus autocomplete="off" spellcheck="false">
         </label>
     `;
-    terminalContent.appendChild(line);
+    const targetContent = termContentElem || document.querySelector("#terminalContent");
+    if (targetContent) targetContent.appendChild(line);
 
     const newInput = document.querySelector("#terminalInput");
     if (!newInput) return;
@@ -142,6 +151,7 @@ function addInputLine() {
 
     newInput.addEventListener("keydown", function (event) {
         if (event.key === "Enter") {
+            event.preventDefault();
             const val = newInput.value.trim();
             if (val) {
                 commandHistory.push(val);
@@ -481,7 +491,8 @@ async function runCommand(cmdString) {
 
         case "clear":
         case "cls":
-            terminalContent.innerHTML = "";
+            const clearTarget = termContentElem || document.querySelector("#terminalContent");
+            if (clearTarget) clearTarget.innerHTML = "";
             addInputLine();
             return;
 
@@ -528,11 +539,18 @@ async function runCommand(cmdString) {
         const outDiv = document.createElement("div");
         outDiv.style.marginBottom = "0.8vmin";
         outDiv.innerHTML = output;
-        terminalContent.appendChild(outDiv);
+        const outTarget = termContentElem || document.querySelector("#terminalContent");
+        if (outTarget) outTarget.appendChild(outDiv);
     }
 
     addInputLine();
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    if (terminalWindow && terminalWindow.style.display === "flex") {
+        terminalOpenClose();
+    }
+});
 
 function escapeHTML(str) {
     if (typeof str !== "string") str = String(str);
