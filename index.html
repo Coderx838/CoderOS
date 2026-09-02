@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="preload" as="image" href="Images/Nature_Night.png">
+        <link rel="stylesheet" href="index_style.css">
+        <link rel="stylesheet" href="notes.css">
+        <link rel="stylesheet" href="welcome_window.css">
+        <link rel="stylesheet" href="stopwatch.css">
+        <link rel="stylesheet" href="todo_list.css">
+        <link rel="stylesheet" href="terminal.css">
+        <link rel="stylesheet" href="start_menu.css">
+        <link rel="stylesheet" href="calculator.css">
+        <link rel="stylesheet" href="music_player.css">
+        <link rel="stylesheet" href="gallery.css">
+        <link rel="stylesheet" href="search_menu.css">
+        <link rel="stylesheet" href="settings.css">
+        <link rel="stylesheet" href="browser.css">
+        <link rel="stylesheet" href="files.css">
+        <link rel="stylesheet" href="code_studio.css">
+        <link rel="stylesheet" href="dev_tools.css">
+        <link rel="stylesheet" href="control_widget.css">
+        <link rel="stylesheet" href="cat_widget.css">
+        <link rel="stylesheet" href="calendar_widget.css">
+        <link rel="stylesheet" href="clock_widget.css">
+
+        <title>CoderOS - Developer Web Workstation</title>
+        <link rel="icon" type="image/x-icon" href="Images/Favicon.svg">
+    </head>
+    <body>
+        <audio id="typeSound" src="Audio/type.wav" preload="auto"></audio>
+        <audio id="clickSound" src="Audio/click.wav" preload="auto"></audio>
+        <div id="loadingScreen" class="loading_screen">
+            <svg class="loading_bar_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120px" height="120px" style="overflow: visible;">
+                <circle
+                    cx="60"
+                    cy="60"
+                    r="45"
+                    fill="none"
+                    stroke="rgba(255, 255, 255, 0.12)"
+                    stroke-width="7"
+                />
+                <path
+                    id="loadingProgress"
+                    class="loading_progress"
+                    d="M 60 15 A 45 45 0 1 1 59.9 15"
+                    fill="none"
+                    stroke="url(#loading-coder-grad)"
+                    stroke-width="7"
+                    stroke-linecap="round"
+                />
+                <text x="60" y="68" font-size="24" font-family="'Consolas', monospace" font-weight="bold" fill="var(--loading-accent-end)" text-anchor="middle">&lt; / &gt;</text>
+                <defs>
+                    <linearGradient id="loading-coder-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="var(--loading-accent-start)" />
+                        <stop offset="100%" stop-color="var(--loading-accent-end)" />
+                    </linearGradient>
+                </defs>
+            </svg>
+            <div id="loadingText" class="loading_text">
+                <span>B</span>
+                <span>o</span>
+                <span>o</span>
+                <span>t</span>
+                <span>i</span>
+                <span>n</span>
+                <span>g</span>
+                <span>.</span>
+                <span>.</span>
+                <span>.</span>
+            </div>
+        </div>
+        <div id="startMenu" class="start_menu">
+            <div class="start_menu_top" style="flex-direction: column; gap: 1.5vmin;">
+                <div class="start_menu_title no_select" style="letter-spacing: -0.02em;">CoderOS</div>
+                <div style="font-size: 2.2vmin; color: #00f2fe; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600;">Developer Workstation v1.0</div>
+            </div>
+            <div class="start_menu_bottom">
+                <div id="enterDesktopButton" class="enter_desktop_button clickable no_select" style="width: 14rem; font-weight: 600; font-size: 1.8vmin; letter-spacing: 0.05em;">Launch Workspace</div>
+            </div>
+        </div>
+        <div id="desktop" class="desktop">
+            <div class="top_bar" id="topBar">
+                <div class="menu_buttons">
+                    <h2 id="topBarSearchMenuButton" class="top_bar_item clickable no_select" style="cursor: pointer;">
+                        <img class="top_bar_search_menu_icon" src="Images/Favicon.svg" alt="CoderOS">
+                    </h2>
+                </div>
+                <div class="top_bar_item clickable" style="cursor: pointer; padding: 0.5vmin" id="controlWidgetButton">
+                    <div class="top_bar_control_widget_icons_container no_select">
+                        <img class="top_bar_control_widget_icon" src="Images/battery.svg" alt="Battery">
+                        <img class="top_bar_control_widget_icon" src="Images/wifi.svg" alt="WiFi">
+                    </div>
+                    <h2 class="no_select" style="margin-right: 1vmin;" id="clockTime"></h2>
+                </div>
+            </div>
+            <div id="appIcons" class="app_icons">
+                <div class="app_icon clickable no_select" data-window="codeStudio" title="Code Studio IDE">
+                    <img class="app_icon_svg" src="Images/code_editor.svg" alt="Code Studio">
+                </div>
+                <div class="app_icon clickable no_select" data-window="devTools" title="Dev Tools Suite">
+                    <img class="app_icon_svg" src="Images/dev_tools.svg" alt="Dev Tools">
+                </div>
+                <div class="app_icon clickable no_select" data-window="terminal" title="CoderShell Terminal">
+                    <img class="app_icon_svg" src="Images/terminal.svg" alt="Terminal">
+                </div>
+                <div class="app_icon clickable no_select" data-window="files" title="File Explorer">
+                    <img class="app_icon_svg" src="Images/folder_bold.svg" alt="Files">
+                </div>
+                <div class="app_icon clickable no_select" data-window="browser" title="Web Browser">
+                    <img class="app_icon_svg" src="Images/browser.svg" alt="Browser">
+                </div>
+                <div class="app_icon clickable no_select" data-window="welcomeScreen" title="CoderOS Station">
+                    <img class="app_icon_svg" src="Images/Favicon.svg" alt="Station">
+                </div>
+                <div class="app_icon clickable no_select" data-window="notes" title="Notes">
+                    <img class="app_icon_svg" src="Images/notes.svg" alt="Notes">
+                </div>
+                <div class="app_icon clickable no_select" data-window="todoList" title="To-Do">
+                    <img class="app_icon_svg" src="Images/todo_list.svg" alt="To-Do">
+                </div>
+                <div class="app_icon clickable no_select" data-window="calculator" title="Calculator">
+                    <img class="app_icon_svg" src="Images/calculator.svg" alt="Calc">
+                </div>
+                <div class="app_icon clickable no_select" data-window="stopwatch" title="Stopwatch">
+                    <img class="app_icon_svg" src="Images/stopwatch.svg" alt="Timer">
+                </div>
+                <div class="app_icon clickable no_select" data-window="musicPlayer" title="Music Player">
+                    <img class="app_icon_svg" src="Images/music_player.svg" alt="Music">
+                </div>
+                <div class="app_icon clickable no_select" data-window="gallery" title="Gallery">
+                    <img class="app_icon_svg" src="Images/gallery.svg" alt="Gallery">
+                </div>
+                <div class="app_icon clickable no_select" data-window="settings" title="Settings">
+                    <img class="app_icon_svg" src="Images/settings.svg" alt="Settings">
+                </div>
+            </div>
+            <div class="windows">
+                <div id="searchMenu" class="window search_menu no_dragging" style="display: none">
+                    <div id="searchMenuSearchBar" class="search_menu_search_bar">
+                        <label for="searchMenuInput"></label><input type="text" id="searchMenuInput" class="search_menu_input" placeholder="Search...">
+                    </div>
+                    <div id="searchMenuResults" class="search_menu_results hide_scrollbar"></div>
+                    <div id="searchMenuPowerButton" class="search_menu_power_button clickable">
+                        <img class="search_menu_power_button_icon" src="Images/power.svg" alt="Power">
+                    </div>
+                </div>
+                <div id="welcomeScreen" class="window welcome_window">
+                    <div id="welcomeScreenHeader" class="window_header">
+                        <div class="header_buttons">
+                            <div id="closeWelcomeScreenWindow" class="close_button clickable no_select"></div>
+                            <div id="welcomeScreenMaximizeButton" class="maximize_button clickable no_select"></div>
+                        </div>
+                        <h2 class="header_title no_select">CoderOS Station</h2>
+                    </div>
+                    <div id="welcomeScreenContent" class="window_content" style="display: flex; flex-direction: row;">
+                        <div class="welcome_window_sidebar">
+                            <div class="welcome_window_page_selector clickable" id="welcomeWindowPageSelector1"></div>
+                            <div class="welcome_window_page_selector clickable" id="welcomeWindowPageSelector2"></div>
+                            <div class="welcome_window_page_selector clickable" id="welcomeWindowPageSelector3"></div>
+                        </div>
+                        <div class="welcome_window_content" id="welcomeWindowContent"></div>
+                    </div>
+                </div>
+                <div id="codeStudio" class="window code_studio_window">
+                    <div id="codeStudioHeader" class="window_header">
+                        <div class="header_buttons">
+                            <div id="closeCodeStudioWindow" class="close_button clickable no_select"></div>
+                            <div id="codeStudioMaximizeButton" class="maximize_button clickable no_select"></div>
+                        </div>
+                        <h2 class="header_title no_select">Code Studio IDE</h2>
+                    </div>
+                    <div id="codeStudioContent" class="window_content code_studio_content">
+                        <div class="code_studio_toolbar">
+                            <div class="code_studio_tabs">
+                                <div class="code_studio_tab active" data-tab="html">index.html</div>
+                                <div class="code_studio_tab" data-tab="css">style.css</div>
+                                <div class="code_studio_tab" data-tab="js">main.js</div>
+                            </div>
+                            <div class="code_studio_actions">
+                                <select id="codeStudioTemplate" class="code_studio_select" title="Preset Templates">
+                                    <option value="particles">⚡ Particles</option>
+                                    <option value="matrix">⚡ Matrix Rain</option>
+                                    <option value="clock">⚡ Neon Clock</option>
+                                    <option value="blank">⚡ Blank</option>
+                                </select>
+                                <button id="codeStudioSaveBtn" class="code_studio_btn" title="Save Code">💾 Save</button>
+                                <button id="codeStudioRunBtn" class="code_studio_btn run_btn" title="Run Code">▶ Run</button>
+                            </div>
+                        </div>
+                        <div class="code_studio_main">
+                            <div class="code_studio_editor_pane">
+                                <textarea id="codeStudioEditor" class="code_studio_textarea" spellcheck="false" placeholder="Write code here..."></textarea>
+                            </div>
+                            <div class="code_studio_preview_pane">
+                                <iframe id="codeStudioPreview" class="code_studio_preview_iframe" sandbox="allow-scripts allow-modals allow-same-origin"></iframe>
+                            </div>
+                        </div>
+                        <div id="codeStudioConsole" class="code_studio_console">
+                            <div class="code_studio_console_title">Output Console</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="devTools" class="window dev_tools_window">
+                    <div id="devToolsHeader" class="window_header">
+                        <div class="header_buttons">
+                            <div id="closeDevToolsWindow" class="close_button clickable no_select"></div>
+                            <div id="devToolsMaximizeButton" class="maximize_button clickable no_select"></div>
+                        </div>
+                        <h2 class="header_title no_select">Dev Tools Suite</h2>
+                    </div>
+                    <div id="devToolsContent" class="window_content dev_tools_content">
+                        <div class="dev_tools_sidebar">
+                            <button class="dev_tools_nav_btn active" data-tool="json">{ } JSON</button>
+                            <button class="dev_tools_nav_btn" data-tool="b64">🔤 Base64</button>
+                            <button class="dev_tools_nav_btn" data-tool="url">🔗 URL</button>
+                            <button class="dev_tools_nav_btn" data-tool="color">🎨 Color</button>
+                            <button class="dev_tools_nav_btn" data-tool="regex">🔍 Regex</button>
+                        </div>
+                        <div class="dev_tools_main">
+                            <!-- JSON Tool -->
+                            <div id="devToolPanel_json" class="dev_tool_panel active">
+                                <div class="dev_tool_header">
+                                    <span class="dev_tool_title">JSON Formatter &amp; Validator</span>
+                                    <div class="dev_tool_btn_group">
+                                        <button id="jsonFormatBtn" class="dev_tool_btn">Format</button>
+                                        <button id="jsonMinifyBtn" class="dev_tool_btn">Minify</button>
+                                    </div>
+                                </div>
+                                <div id="jsonStatus" class="dev_tool_status">Ready</div>
+                                <div class="dev_tool_split">
+                                    <div class="dev_tool_col">
+                                        <span class="dev_tool_label">Raw JSON</span>
+                                        <textarea id="jsonToolInput" class="dev_tool_textarea" placeholder='{"name":"CoderOS","developer":true}'></textarea>
+                                    </div>
+                                    <div class="dev_tool_col">
+                                        <span class="dev_tool_label">Output</span>
+                                        <textarea id="jsonToolOutput" class="dev_tool_textarea" readonly placeholder="Result..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Base64 Tool -->
+                            <div id="devToolPanel_b64" class="dev_tool_panel">
+                                <div class="dev_tool_header">
+                                    <span class="dev_tool_title">Base64 Encoder / Decoder</span>
+                                    <div class="dev_tool_btn_group">
+                                        <button id="b64EncodeBtn" class="dev_tool_btn">Encode</button>
+                                        <button id="b64DecodeBtn" class="dev_tool_btn">Decode</button>
+                                    </div>
+                                </div>
+                                <div class="dev_tool_split">
+                                    <div class="dev_tool_col">
+                                        <span class="dev_tool_label">Input Text</span>
+                                        <textarea id="b64Input" class="dev_tool_textarea" placeholder="Enter text to encode/decode..."></textarea>
+                                    </div>
+                                    <div class="dev_tool_col">
+                                        <span class="dev_tool_label">Output Text</span>
+                                        <textarea id="b64Output" class="dev_tool_textarea" readonly placeholder="Base64 output..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- URL Tool -->
+                            <div id="devToolPanel_url" class="dev_tool_panel">
+                                <div class="dev_tool_header">
+                                    <span class="dev_tool_title">URL Encoder / Decoder</span>
+                                    <div class="dev_tool_btn_group">
+                                        <button id="urlEncodeBtn" class="dev_tool_btn">Encode URL</button>
+                                        <button id="urlDecodeBtn" class="dev_tool_btn">Decode URL</button>
+                                    </div>
+                                </div>
+                                <div class="dev_tool_split">
+                                    <div class="dev_tool_col">
+                                        <span class="dev_tool_label">Raw String</span>
+                                        <textarea id="urlInput" class="dev_tool_textarea" placeholder="https://coderos.dev/search?q=developer tools"></textarea>
+                                    </div>
+                                    <div class="dev_tool_col">
+                                        <span class="dev_tool_label">Transformed URL</span>
+                                        <textarea id="urlOutput" class="dev_tool_textarea" readonly placeholder="Encoded / Decoded output..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Color Tool -->
+                            <div id="devToolPanel_color" class="dev_tool_panel">
+                                <div class="dev_tool_header">
+                                    <span class="dev_tool_title">Color Converter &amp; Palette</span>
+                                </div>
+                                <div class="color_picker_display">
+                                    <input type="color" id="colorPickerInput" value="#00f2fe" style="cursor: pointer; width: 4vmin; height: 4vmin; border: none; background: transparent;">
+                                    <div id="colorPreviewBox" class="color_preview_box" style="background-color: #00f2fe;"></div>
+                                    <div style="display: flex; flex-direction: column; gap: 0.5vmin; flex: 1;">
+                                        <div>HEX: <input type="text" id="colorHexVal" class="dev_tool_input" value="#00f2fe" style="width: 12vmin;" readonly></div>
+                                        <div>RGB: <input type="text" id="colorRgbVal" class="dev_tool_input" value="rgb(0, 242, 254)" style="width: 16vmin;" readonly></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Regex Tool -->
+                            <div id="devToolPanel_regex" class="dev_tool_panel">
+                                <div class="dev_tool_header">
+                                    <span class="dev_tool_title">Regex Tester</span>
+                                </div>
+                                <div style="display: flex; gap: 0.8vmin;">
+                                    <input type="text" id="regexPattern" class="dev_tool_input" placeholder="Regex pattern (e.g. [A-Za-z0-9_]+)" style="flex: 3;">
+                                    <input type="text" id="regexFlags" class="dev_tool_input" placeholder="Flags (g, i, m)" value="g" style="flex: 1;">
+                                </div>
+                                <span class="dev_tool_label">Test String</span>
+                                <textarea id="regexTestText" class="dev_tool_textarea" style="height: 10vmin;" placeholder="Enter string to test pattern against..."></textarea>
+                                <span class="dev_tool_label">Matches</span>
+                                <div id="regexMatches" class="dev_tool_textarea hide_scrollbar" style="height: 10vmin; overflow-y: auto;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="stopwatch" class="window stopwatch">
+                    <div id="stopwatchHeader" class="window_header">
+                        <div class="header_buttons">
+                            <div id="closeStopwatchWindow" class="close_button clickable no_select"></div>
+                            <div id="stopwatchMaximizeButton" class="maximize_button clickable no_select"></div>
+                        </div>
+                        <h2 class="header_title no_select">Stopwatch</h2>
+                    </div>
+                    <div id="stopwatchContent" class="window_content" style="display: flex; flex-direction: column">
+                        <div class="stopwatch_time" id="stopwatchTime">00:00:00:00</div>
+                        <div class="stopwatch_buttons">
+                            <div class="stopwatch_buttons_left_side"></div>
+                            <div class="stopwatch_start_stop_button clickable" id="stopwatchStartStopButton">
+                                <i class="material-icons start_stop_icon no_select">play_arrow</i>
+                            </div>
+                            <div class="stopwatch_buttons_right_side">
+                                <div class="stopwatch_reset_button clickable" id="stopwatchResetButton">
+                                    <i class="material-icons reset_icon no_select">replay</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="notes" class="window notes">
+                    <div id="notesHeader" class="window_header">
+                        <div class="header_buttons">
+                            <div id="closeNotesWindow" class="close_button clickable no_select"></div>
+                            <div id="notesMaximizeButton" class="maximize_button clickable no_select"></div>
+                        </div>
+                        <h2 class="header_title no_select" id="notesHeaderTitle">Notes</h2>
+                    </div>
+                    <div id="notesContent" class="window_content" style="display: flex; flex-direction: row">
+                        <div class="notes_sidebar" style="padding: 0">
+                            <div class="notes_sidebar_pages hide_scrollbar" id="notesSidebarPages"></div>
+                            <div>
+                                <div class="notes_sidebar_add_page clickable no_select" id="notesSidebarAddPage">+</div>
+                                <div class="notes_sidebar_reset clickable no_select" id="notesSidebarReset">x</div>
+                            </div>
+                        </div>
+                        <div class="notes_content hide_scrollbar" id="notesPageContent"></div>
+                    </div>
+                </div>
+                <div id="todoList" class="window todo_list_window">
+                    <div id="todoListHeader" class="window_header">
+                        <div class="header_buttons">
+                            <div id="closeTodoWindow" class="close_button clickable no_select"></div>
+                            <div id="todoListMaximizeButton" class="maximize_button clickable no_select"></div>
+                        </div>
+                        <h2 class="header_title no_select">To-Do List</h2>
+                    </div>
+                    <div id="todoListContent" class="window_content" style="display: flex; flex-direction: column">
+                        <div class="todo_top_bar">
+                            <label>
+                                <input class="todo_top_bar_add_name" type="text" id="todoTopBarAddName">
+                            </label>
+                            <div class="todo_top_bar_add_button clickable" id="todoTopbarAddButton"></div>
+                        </div>
+                        <div class="todo_content hide_scrollbar" id="todoContent"></div>
+                    </div>
+                </div>
+                <div id="terminal" class="window terminal_window">
+                    <div id="terminalHeader" class="window_header">
+                        <div class="header_buttons">
+                            <div id="closeTerminalWindow" class="close_button clickable no_select"></div>
+                            <div id="terminalMaximizeButton" class="maximize_button clickable no_select"></div>
+                        </div>
+                        <h2 class="header_title no_select">Terminal</h2>
+                    </div>
+                    <div id="terminalContent" class="window_content terminal_window_content hide_scrollbar" style="display: flex; flex-direction: column; justify-content: flex-start"></div>
+                </div>
+                <div id="calculator" class="window" style="width: 34vmin; display: none">
+                    <div id="calculatorHeader" class="window_header">
+                        <div class="header_buttons">
+                            <div id="closeCalculatorWindow" class="close_button clickable no_select"></div>
+                        </div>
+                        <h2 class="header_title no_select">Calculator</h2>
+                    </div>
+                    <div id="calculatorContent" class="calculator_content hide_scrollbar">
+                        <div id="calculatorDisplay" class="calculator_display"></div>
+                        <div class="calculator_buttons">
+                            <div class="calculator_buttons_left">
+                                <div class="calculator_button_row">
+                                    <div id="calculatorButtonAdd" class="calculator_button clickable no_select">+</div>
+                                    <div id="calculatorButtonSubtract" class="calculator_button clickable no_select">−</div>
+                                    <div id="calculatorButtonMultiply" class="calculator_button clickable no_select">×</div>
+                                </div>
+                                <div class="calculator_button_row">
+                                    <div id="calculatorButton7" class="calculator_button clickable no_select">7</div>
+                                    <div id="calculatorButton8" class="calculator_button clickable no_select">8</div>
+                                    <div id="calculatorButton9" class="calculator_button clickable no_select">9</div>
+                                </div>
+                                <div class="calculator_button_row">
+                                    <div id="calculatorButton4" class="calculator_button clickable no_select">4</div>
+                                    <div id="calculatorButton5" class="calculator_button clickable no_select">5</div>
+                                    <div id="calculatorButton6" class="calculator_button clickable no_select">6</div>
+                                </div>
+                                <div class="calculator_button_row">
+                                    <div id="calculatorButton1" class="calculator_button clickable no_select">1</div>
+                                    <div id="calculatorButton2" class="calculator_button clickable no_select">2</div>
+                                    <div id="calculatorButton3" class="calculator_button clickable no_select">3</div>
+                                </div>
+                                <div class="calculator_button_row">
+                                    <div id="calculatorButton0" class="calculator_button clickable no_select">0</div>
+                                    <div id="calculatorButtonDecimal" class="calculator_button clickable no_select">.</div>
+                                    <div id="calculatorButtonDelete" class="calculator_button clickable no_select">C</div>
+                                </div>
+                            </div>
+                            <div class="calculator_buttons_right">
+                                <div id="calculatorButtonDivide" class="calculator_button clickable no_select">÷</div>
+                                <div id="calculatorButtonEquals" class="calculator_button_calculate clickable no_select">=</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="musicPlayer" class="window music_player">
+                    <div id="musicPlayerHeader" class="window_header">
+                        <div class="header_buttons">
+                            <div id="closeMusicPlayerWindow" class="close_button clickable no_select"></div>
+                        </div>
+                        <h2 class="header_title no_select">Music Player</h2>
+                    </div>
+                    <div id="musicPlayerContent" class="music_player_content hide_scrollbar">
+                        <img id="musicPlayerImage" class="music_player_image music_player_no_image" src="Images/no_music.svg" alt="No song played">
+                        <div id="musicPlayerSongTitle" class="music_player_song_title no_select"></div>
+                        <div class="music_player_progress_bar">
+                            <div id="musicPlayerProgress" class="music_player_progress"></div>
+                        </div>
+                        <div class="music_player_controls">
+                            <div id="musicPlayerPreviousButton" class="music_player_previous_button clickable no_select">
+                                <i class="material-icons music_player_previous_button_icon no_select">skip_previous</i>
+                            </div>
+                            <div id="musicPlayerPlayPauseButton" class="music_player_play_pause_button clickable no_select">
+                                <i class="material-icons music_player_play_pause_button_icon no_select">pause</i>
+                            </div>
+                            <div id="musicPlayerNextButton" class="music_player_next_button clickable no_select">
+                                <i class="material-icons music_player_next_button_icon no_select">skip_next</i>
+                            </div>
+                        </div>
+                        <div class="music_player_playlist hide_scrollbar" id="musicPlayerPlaylist"></div>
+                    </div>
+                </div>
+                <div id="gallery" class="window gallery">
+                    <div id="galleryHeader" class="window_header">
+                        <div class="header_buttons">
+                            <div id="closeGalleryWindow" class="close_button clickable no_select"></div>
+                            <div id="galleryMaximizeButton" class="maximize_button clickable no_select"></div>
+                        </div>
+                        <h2 class="header_title no_select">Gallery</h2>
+                    </div>
+                    <div id="galleryContent" class="gallery_content hide_scrollbar"></div>
+                </div>
+                <div id="settings" class="window settings">
+                    <div id="settingsHeader" class="window_header">
+                        <div class="header_buttons">
+                            <div id="closeSettingsWindow" class="close_button clickable no_select"></div>
+                            <div id="settingsMaximizeButton" class="maximize_button clickable no_select"></div>
+                        </div>
+                        <h2 class="header_title no_select">Settings</h2>
+                    </div>
+                    <div id="settingsContent" class="settings_content hide_scrollbar">
+                        <div class="settings_section">
+                            <h2 class="settings_section_title">General</h2>
+                            <div class="settings_general_table">
+                                <div class="setting_general_table_entry">
+                                    <p class="setting_general_table_entry_item" style="border-right: solid 0.15vmin rgba(255, 255, 255, 0.5)">Operating System</p>
+                                    <p class="setting_general_table_entry_item">CoderOS 1.0.0 Dev Edition</p>
+                                </div>
+                                <div class="setting_general_table_entry">
+                                    <p class="setting_general_table_entry_item" style="border-right: solid 0.15vmin rgba(255, 255, 255, 0.5);">Written in</p>
+                                    <p class="setting_general_table_entry_item">HTML5 / CSS3 / ES6+</p>
+                                </div>
+                                <div class="setting_general_table_entry">
+                                    <p class="setting_general_table_entry_item" style="border-right: solid 0.15vmin rgba(255, 255, 255, 0.5);">Storage Capacity</p>
+                                    <p class="setting_general_table_entry_item">512 CoderBytes</p>
+                                </div>
+                                <div class="setting_general_table_entry">
+                                    <p class="setting_general_table_entry_item" style="border-right: solid 0.15vmin rgba(255, 255, 255, 0.5);">Storage occupied</p>
+                                    <p class="setting_general_table_entry_item">54.2 CoderBytes</p>
+                                </div>
+                                <div class="setting_general_table_entry">
+                                    <p class="setting_general_table_entry_item" style="border-right: solid 0.15vmin rgba(255, 255, 255, 0.5);">Created with</p>
+                                    <p class="setting_general_table_entry_item">Code &amp; Caffeine</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings_section">
+                            <h2 class="settings_section_title">Theme</h2>
+                            <div class="dark_light_mode_controls" style="flex-wrap: wrap;">
+                                <div id="lightModeButton" title="Light Emerald" class="switch_dark_light_mode_button light_mode_button clickable no_select"></div>
+                                <div id="darkModeButton" title="Dark Slate" class="switch_dark_light_mode_button dark_mode_button clickable no_select"></div>
+                                <div id="matrixModeButton" title="Matrix Digital Rain" class="switch_dark_light_mode_button matrix_mode_button clickable no_select"></div>
+                                <div id="cyberpunkModeButton" title="Cyberpunk Neon" class="switch_dark_light_mode_button cyberpunk_mode_button clickable no_select"></div>
+                                <div id="draculaModeButton" title="Dracula Dark" class="switch_dark_light_mode_button dracula_mode_button clickable no_select"></div>
+                                <div id="dayModeButton" title="Day Blue" class="switch_dark_light_mode_button day_mode_button clickable no_select"></div>
+                                <div id="purpleModeButton" title="Deep Purple" class="switch_dark_light_mode_button purple_mode_button clickable no_select"></div>
+                                <div id="sunsetModeButton" title="Sunset Orange" class="switch_dark_light_mode_button sunset_mode_button clickable no_select"></div>
+                                <div id="pinkModeButton" title="Cyber Pink" class="switch_dark_light_mode_button pink_mode_button clickable no_select"></div>
+                            </div>
+                        </div>
+                        <div class="settings_section">
+                            <h2 class="settings_section_title">Widgets</h2>
+                            <div class="dark_light_mode_controls">
+                                <div id="catWidgetToggle" class="widget_toggle clickable no_select">1</div>
+                                <div id="calendarWidgetToggle" class="widget_toggle clickable no_select">2</div>
+                                <div id="clockWidgetToggle" class="widget_toggle clickable no_select">3</div>
+                            </div>
+                        </div>
+                        <div class="settings_section">
+                            <h2 class="settings_section_title">Sound effects</h2>
+                            <div class="sound_effects_controls">
+                                <div class="sound_toggle_container">
+                                    <div class="sound_effect_label">Click sound</div>
+                                    <div id="clickSoundToggle" class="sound_effect_toggle clickable no_select"></div>
+                                </div>
+                                <div class="sound_toggle_container">
+                                    <div class="sound_effect_label">Typing sound</div>
+                                    <div id="typeSoundToggle" class="sound_effect_toggle clickable no_select"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings_section">
+                            <h2 class="settings_section_title">Icon Bar</h2>
+                            <div class="sound_effects_controls">
+                                <div class="sound_toggle_container">
+                                    <div class="sound_effect_label">Hide Icon Bar when Maximized</div>
+                                    <div id="hideIconBarWhenMaximizedToggle" class="sound_effect_toggle clickable no_select"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings_section">
+                            <h2 class="settings_section_title">Factory Reset</h2>
+                            <div id="factoryResetButton" class="factory_reset_button clickable no_select">
+                                <img class="factory_reset_button_icon" src="Images/exit.svg" alt="Factory Reset">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="browser" class="window browser">
+                    <div id="browserHeader" class="window_header">
+                        <div class="header_buttons">
+                            <div id="closeBrowserWindow" class="close_button clickable no_select"></div>
+                            <div id="browserMaximizeButton" class="maximize_button clickable no_select"></div>
+                        </div>
+                        <h2 class="header_title no_select">Browser</h2>
+                    </div>
+                    <div id="browserContent" class="browser_content">
+                        <div class="browser_top_bar">
+                            <input type="text" id="browserURLBar" class="browser_url_bar" placeholder="Enter a URL...">
+                            <div id="browserHomeButton" class="browser_home_button clickable no_select">
+                                <img class="browser_home_button_icon" src="Images/home.svg" alt="Home">
+                            </div>
+                        </div>
+                        <div id="browserWebContent" class="browser_web_content"></div>
+                    </div>
+                </div>
+                <div id="files" class="window files">
+                    <div id="filesHeader" class="window_header">
+                        <div class="header_buttons">
+                            <div id="closeFilesWindow" class="close_button clickable no_select"></div>
+                            <div id="filesMaximizeButton" class="maximize_button clickable no_select"></div>
+                        </div>
+                        <h2 class="header_title no_select">Files</h2>
+                    </div>
+                    <div id="filesContent" class="files_content">
+                        <div class="files_top_bar">
+                            <div id="filesReturnToParentDirectoryButton" class="files_return_to_parent_directory_button clickable no_select">
+                                <img class="files_header_icon" src="Images/arrow_up.svg" alt="Return">
+                            </div>
+                            <div id="filesCurrentDirectory" class="files_current_directory"></div>
+                            <div id="filesAddFolderButton" class="files_add_button clickable no_select">
+                                <img class="files_header_icon" src="Images/add_folder.svg" alt="Add Folder">
+                            </div>
+                            <div id="filesAddFileButton" class="files_add_button clickable no_select">
+                                <img class="files_header_icon" src="Images/add_file.svg" alt="Add File">
+                            </div>
+                        </div>
+                        <div class="files_main_content">
+                            <div class="files_content_sidebar">
+                                <div class="files_content_sidebar_title">Contents</div>
+                                <div id="filesSidebarList" class="files_content_sidebar_list hide_scrollbar"></div>
+                            </div>
+                            <div id="filesContentMain" class="files_content_main hide_scrollbar"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="controlWidget" class="window control_widget no_dragging" style="width: 20vmin; display: none; overflow: hidden;">
+                    <div class="control_widget_first_row_controls">
+                        <div id="wifiButton" class="control_widget_control_button clickable no_select">
+                            <img class="control_widget_control_button_icon" src="Images/wifi.svg" alt="WiFi">
+                        </div>
+                        <div id="bluetoothButton" class="control_widget_control_button clickable no_select">
+                            <img class="control_widget_control_button_icon" src="Images/bluetooth.svg" alt="Bluetooth">
+                        </div>
+                        <div id="airplaneModeButton" class="control_widget_control_button clickable no_select">
+                            <img class="control_widget_control_button_icon" src="Images/airplane_mode.svg" alt="Airplane Mode">
+                        </div>
+                    </div>
+                    <div class="control_widget_second_row_controls">
+                        <div class="control_widget_slider_control">
+                            <img class="control_widget_control_slider_icon" src="Images/brightness.svg" alt="Brightness">
+                            <label for="brightnessSlider"></label><input type="range" id="brightnessSlider" class="control_widget_slider" min="0" max="100" value="100">
+                        </div>
+                        <div class="control_widget_slider_control">
+                            <img class="control_widget_control_slider_icon" id="volumeSliderIcon" src="Images/volume.svg" alt="Volume">
+                            <label for="volumeSlider"></label><input type="range" id="volumeSlider" class="control_widget_slider" min="0" max="100" value="100">
+                        </div>
+                    </div>
+                    <div class="control_widget_third_row">
+                        <img class="control_widget_third_row_icon" style="margin-right: 0.5vmin" src="Images/battery.svg" alt="Battery">
+                        <div class="control_widget_third_row_right_side">
+                            <p id="wifiStatus" class="control_widget_third_row_text">WiFi connected</p>
+                            <div id="controlWidgetSettings" class="control_widget_third_row_settings clickable no_select">
+                                <img class="control_widget_third_row_icon" src="Images/settings.svg" alt="Settings">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="catWidget" class="window cat_widget" style="display: flex;">
+                    <div class="dev_widget_top">
+                        <div id="catImageContainer" class="cat_image_container" title="Click Rubber Duck for debugging tips!">
+                            <img class="cat_image" src="Images/duck.svg" alt="Dev Duck">
+                        </div>
+                        <div id="duckSpeechBubble" class="dev_widget_bubble">
+                            Duck: Click me for debugging wisdom! 🦆
+                        </div>
+                    </div>
+                    <div class="dev_widget_stats">
+                        <div class="dev_stat_row">
+                            <span id="cpuText">CPU: 24%</span>
+                            <div class="dev_stat_bar_bg">
+                                <div id="cpuBarFill" class="dev_stat_bar_fill" style="width: 24%;"></div>
+                            </div>
+                        </div>
+                        <div class="dev_stat_row">
+                            <span id="ramText">RAM: 48%</span>
+                            <div class="dev_stat_bar_bg">
+                                <div id="ramBarFill" class="dev_stat_bar_fill" style="width: 48%; background: linear-gradient(90deg, #00f2fe, #4facfe);"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <audio id="catMeowSound" src="Audio/click.wav"></audio>
+                </div>
+                <div id="calendarWidget" class="window calendar_widget" style="width: 20vmin; height: 23vmin; display: flex;">
+                    <div class="calendar_top_bar">
+                        <div id="calendarBack" class="calendar_button clickable no_select">
+                            <img class="calendar_button_icon" src="Images/arrow_left.svg" alt="Back">
+                        </div>
+                        <div class="calendar_current_month_year no_select" id="calendarCurrentMonthYear"></div>
+                        <div id="calendarForward" class="calendar_button clickable no_select">
+                            <img class="calendar_button_icon" src="Images/arrow_right.svg" alt="Forward">
+                        </div>
+                    </div>
+                    <div class="calendar_days_of_week">
+                        <div class="calendar_day_of_week no_select">Sun</div>
+                        <div class="calendar_day_of_week no_select">Mon</div>
+                        <div class="calendar_day_of_week no_select">Tue</div>
+                        <div class="calendar_day_of_week no_select">Wed</div>
+                        <div class="calendar_day_of_week no_select">Thu</div>
+                        <div class="calendar_day_of_week no_select">Fri</div>
+                        <div class="calendar_day_of_week no_select">Sat</div>
+                    </div>
+                    <div class="calendar_days" id="calendarDays"></div>
+                </div>
+                <div id="clockWidget" class="window clock_widget" style="width: 20vmin; height: 20vmin; display: flex">
+                    <div class="clock_face">
+                        <div id="clockHourHand" class="clock_hand hour_hand"></div>
+                        <div id="clockMinuteHand" class="clock_hand minute_hand"></div>
+                        <div id="clockSecondHand" class="clock_hand second_hand"></div>
+                        <div class="clock_center_dot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="Scripts/script.js"></script>
+        <script src="Scripts/code_studio.js"></script>
+        <script src="Scripts/dev_tools.js"></script>
+        <script src="Scripts/matrix_overlay.js"></script>
+        <script src="Scripts/welcome_window.js"></script>
+        <script src="Scripts/notes.js"></script>
+        <script src="Scripts/stopwatch.js"></script>
+        <script src="Scripts/todo_list.js"></script>
+        <script src="Scripts/terminal.js"></script>
+        <script src="Scripts/start_menu.js"></script>
+        <script src="Scripts/calculator.js"></script>
+        <script src="Scripts/music_player.js"></script>
+        <script src="Scripts/gallery.js"></script>
+        <script src="Scripts/search_menu.js"></script>
+        <script src="Scripts/settings.js"></script>
+        <script src="Scripts/browser.js"></script>
+        <script src="Scripts/files.js"></script>
+        <script src="Scripts/control_widget.js"></script>
+        <script src="Scripts/cat_widget.js"></script>
+        <script src="Scripts/calendar_widget.js"></script>
+        <script src="Scripts/clock_widget.js"></script>
+        <script src="Scripts/sound_effects.js"></script>
+    </body>
+</html>

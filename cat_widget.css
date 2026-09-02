@@ -1,0 +1,100 @@
+/* CoderOS Developer Mascot & Debugger Widget */
+.cat_widget {
+    height: 16vmin;
+    width: 22vmin !important;
+    top: 7vmin;
+    left: 2vmin;
+    background: rgba(15, 23, 42, 0.75);
+    border: 0.1vmin solid rgba(0, 242, 254, 0.25);
+    border-radius: 1.5vmin;
+    padding: 0.8vmin;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0.8vmin 2vmin rgba(0, 0, 0, 0.4);
+}
+
+.dev_widget_top {
+    display: flex;
+    align-items: center;
+    gap: 1vmin;
+    flex: 1;
+}
+
+.cat_image_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 7vmin;
+    height: 7vmin;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1vmin;
+    transition: transform 0.15s ease;
+    flex-shrink: 0;
+}
+
+.cat_image_container:hover {
+    transform: scale(1.08);
+}
+
+.cat_image {
+    width: 85%;
+    height: 85%;
+    object-fit: contain;
+}
+
+.dev_widget_bubble {
+    flex: 1;
+    background: rgba(0, 242, 254, 0.12);
+    border: 0.1vmin solid rgba(0, 242, 254, 0.3);
+    border-radius: 0.8vmin;
+    padding: 0.5vmin;
+    font-size: 1.1vmin;
+    line-height: 1.25;
+    color: #e2e8f0;
+    max-height: 7vmin;
+    overflow-y: auto;
+    font-family: 'Outfit', sans-serif;
+    user-select: none;
+}
+
+.dev_widget_stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3vmin;
+    margin-top: 0.5vmin;
+    font-size: 1vmin;
+    color: #94a3b8;
+    user-select: none;
+}
+
+.dev_stat_row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dev_stat_bar_bg {
+    width: 12vmin;
+    height: 0.6vmin;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.3vmin;
+    overflow: hidden;
+}
+
+.dev_stat_bar_fill {
+    height: 100%;
+    background: linear-gradient(90deg, #38ef7d, #00f2fe);
+    width: 35%;
+    transition: width 0.5s ease;
+}
+
+.cat_pressed {
+    animation: catPressed 0.15s forwards;
+}
+
+@keyframes catPressed {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.88); }
+    100% { transform: scale(1); }
+}

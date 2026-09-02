@@ -1,0 +1,203 @@
+/* CoderOS Dev Tools Suite Styling */
+.dev_tools_window {
+    display: none;
+    resize: both;
+    width: 62vmin;
+    height: 44vmin;
+    min-width: 45vmin;
+    min-height: 32vmin;
+}
+
+.dev_tools_content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: calc(100% - 3.5vmin);
+    background: #0d131f;
+    color: #e2e8f0;
+    font-family: 'Outfit', sans-serif;
+    overflow: hidden;
+}
+
+.dev_tools_sidebar {
+    width: 15vmin;
+    background: #151d2c;
+    border-right: 0.1vmin solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    padding: 1vmin 0.6vmin;
+    gap: 0.5vmin;
+}
+
+.dev_tools_nav_btn {
+    padding: 0.7vmin 1vmin;
+    font-size: 1.3vmin;
+    font-weight: 500;
+    color: #94a3b8;
+    background: transparent;
+    border: none;
+    border-radius: 0.6vmin;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 0.8vmin;
+}
+
+.dev_tools_nav_btn:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #f1f5f9;
+}
+
+.dev_tools_nav_btn.active {
+    background: linear-gradient(90deg, rgba(0, 242, 254, 0.2), rgba(79, 172, 254, 0.1));
+    color: #00f2fe;
+    border-left: 0.3vmin solid #00f2fe;
+    font-weight: 600;
+}
+
+.dev_tools_main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1.2vmin 1.5vmin;
+    overflow-y: auto;
+    background: #0b0f19;
+}
+
+.dev_tool_panel {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+    gap: 1vmin;
+}
+
+.dev_tool_panel.active {
+    display: flex;
+}
+
+.dev_tool_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.6vmin;
+    border-bottom: 0.1vmin solid rgba(255, 255, 255, 0.08);
+}
+
+.dev_tool_title {
+    font-size: 1.6vmin;
+    font-weight: 600;
+    color: #38ef7d;
+}
+
+.dev_tool_btn_group {
+    display: flex;
+    gap: 0.6vmin;
+}
+
+.dev_tool_btn {
+    padding: 0.4vmin 0.8vmin;
+    font-size: 1.1vmin;
+    border-radius: 0.4vmin;
+    border: 0.1vmin solid rgba(255, 255, 255, 0.15);
+    background: #1e293b;
+    color: #f8fafc;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.dev_tool_btn:hover {
+    background: #334155;
+    border-color: #00f2fe;
+}
+
+.dev_tool_textarea {
+    flex: 1;
+    width: 100%;
+    background: #111827;
+    border: 0.1vmin solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.6vmin;
+    color: #38ef7d;
+    font-family: 'Consolas', monospace;
+    font-size: 1.3vmin;
+    line-height: 1.4;
+    padding: 0.8vmin;
+    outline: none;
+    resize: none;
+}
+
+.dev_tool_textarea:focus {
+    border-color: #00f2fe;
+    box-shadow: 0 0 0.8vmin rgba(0, 242, 254, 0.2);
+}
+
+.dev_tool_input {
+    width: 100%;
+    background: #111827;
+    border: 0.1vmin solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.4vmin;
+    color: #f8fafc;
+    font-family: 'Consolas', monospace;
+    font-size: 1.3vmin;
+    padding: 0.6vmin;
+    outline: none;
+}
+
+.dev_tool_input:focus {
+    border-color: #00f2fe;
+}
+
+.dev_tool_split {
+    display: flex;
+    flex: 1;
+    gap: 1vmin;
+    min-height: 0;
+}
+
+.dev_tool_col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4vmin;
+}
+
+.dev_tool_label {
+    font-size: 1.1vmin;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.dev_tool_status {
+    font-size: 1.1vmin;
+    padding: 0.3vmin 0.6vmin;
+    border-radius: 0.3vmin;
+}
+
+.dev_tool_status.valid {
+    color: #38ef7d;
+    background: rgba(56, 239, 125, 0.15);
+}
+
+.dev_tool_status.invalid {
+    color: #f87171;
+    background: rgba(248, 113, 113, 0.15);
+}
+
+.color_picker_display {
+    display: flex;
+    align-items: center;
+    gap: 1.5vmin;
+    padding: 1vmin;
+    background: #162032;
+    border-radius: 0.8vmin;
+}
+
+.color_preview_box {
+    width: 6vmin;
+    height: 6vmin;
+    border-radius: 0.8vmin;
+    border: 0.2vmin solid rgba(255, 255, 255, 0.3);
+}

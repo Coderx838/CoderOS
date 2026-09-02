@@ -1,0 +1,182 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,html {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Outfit', sans-serif;
+}
+
+.welcome_window {
+    display: none;
+    resize: both;
+    width: 54vmin;
+    height: 60vmin;
+    min-height: 30vmin;
+    min-width: 45vmin;
+}
+
+.welcome_window_sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    width: 6vmin;
+    height: 100%;
+    border-bottom-right-radius: 2vmin;
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+.welcome_window_page_selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1vmin;
+    width: 4vmin;
+    aspect-ratio: 1 / 1;
+    border-radius: 30%;
+    background: var(--notes-selector-bg);
+    box-shadow: 0 0.3vmin 0.6vmin rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: ease 0.15s;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5vmin;
+}
+
+.welcome_window_page_selector:hover {
+    transform: scale(1.1);
+}
+
+.page_selected {
+    transform: scale(1.1);
+    box-shadow: 0 0 1vmin rgba(0, 242, 254, 0.6);
+}
+
+.select_page {
+    animation: selectPage 0.15s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes selectPage {
+    0% { transform: scale(1.1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1.1); }
+}
+
+.welcome_window_content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5vmin;
+    gap: 1.2vmin;
+    color: #f1f5f9;
+}
+
+.welcome_window_page_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 4vmin;
+    border-bottom: 0.2vmin solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 0.5vmin;
+}
+
+.welcome_window_title {
+    margin: 0;
+    line-height: 1.2;
+    font-size: 2.2vmin;
+    color: #00f2fe;
+}
+
+.welcome_profile_card {
+    display: flex;
+    align-items: center;
+    gap: 1.5vmin;
+    padding: 1.2vmin;
+    background: rgba(255, 255, 255, 0.06);
+    border: 0.1vmin solid rgba(255, 255, 255, 0.15);
+    border-radius: 1.2vmin;
+}
+
+.welcome_profile_avatar {
+    width: 8vmin;
+    height: 8vmin;
+    border-radius: 1vmin;
+    background: #1e293b;
+    border: 0.2vmin solid #00f2fe;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome_profile_details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3vmin;
+    flex: 1;
+}
+
+.welcome_profile_name_input {
+    background: transparent;
+    border: none;
+    border-bottom: 0.1vmin dashed rgba(255, 255, 255, 0.3);
+    color: #f8fafc;
+    font-size: 1.8vmin;
+    font-weight: 600;
+    outline: none;
+    padding: 0.2vmin 0;
+}
+
+.welcome_profile_title_input {
+    background: transparent;
+    border: none;
+    color: #38ef7d;
+    font-size: 1.2vmin;
+    outline: none;
+}
+
+.tech_badge_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6vmin;
+    margin-top: 0.5vmin;
+}
+
+.tech_badge {
+    background: rgba(0, 242, 254, 0.15);
+    color: #00f2fe;
+    border: 0.1vmin solid rgba(0, 242, 254, 0.3);
+    padding: 0.3vmin 0.8vmin;
+    border-radius: 2vmin;
+    font-size: 1.1vmin;
+    font-weight: 500;
+}
+
+.welcome_feature_list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6vmin;
+    font-size: 1.3vmin;
+}
+
+.welcome_feature_item {
+    display: flex;
+    align-items: center;
+    gap: 0.8vmin;
+    padding: 0.6vmin 0.8vmin;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 0.6vmin;
+}
+
+.welcome_feature_item i {
+    color: #38ef7d;
+    font-size: 1.6vmin;
+}

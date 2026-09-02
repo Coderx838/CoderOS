@@ -1,0 +1,170 @@
+/* CoderOS Code Studio IDE Styling */
+.code_studio_window {
+    display: none;
+    resize: both;
+    width: 65vmin;
+    height: 48vmin;
+    min-width: 45vmin;
+    min-height: 35vmin;
+}
+
+.code_studio_content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100% - 3.5vmin);
+    background: #0f141c;
+    color: #e2e8f0;
+    font-family: 'Consolas', 'Fira Code', monospace;
+    overflow: hidden;
+}
+
+.code_studio_toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6vmin 1vmin;
+    background: #18202c;
+    border-bottom: 0.1vmin solid rgba(255, 255, 255, 0.08);
+    gap: 0.8vmin;
+}
+
+.code_studio_tabs {
+    display: flex;
+    gap: 0.4vmin;
+}
+
+.code_studio_tab {
+    padding: 0.4vmin 1vmin;
+    font-size: 1.3vmin;
+    cursor: pointer;
+    border-radius: 0.4vmin;
+    background: rgba(255, 255, 255, 0.05);
+    color: #94a3b8;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.code_studio_tab:hover {
+    color: #f1f5f9;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.code_studio_tab.active {
+    background: #00f2fe;
+    color: #0f172a;
+    font-weight: bold;
+}
+
+.code_studio_actions {
+    display: flex;
+    gap: 0.6vmin;
+    align-items: center;
+}
+
+.code_studio_btn {
+    padding: 0.4vmin 0.9vmin;
+    font-size: 1.2vmin;
+    font-family: inherit;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.4vmin;
+    cursor: pointer;
+    background: #334155;
+    color: #f8fafc;
+    transition: all 0.2s;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4vmin;
+}
+
+.code_studio_btn:hover {
+    filter: brightness(1.2);
+    transform: translateY(-0.1vmin);
+}
+
+.code_studio_btn.run_btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    box-shadow: 0 0 1vmin rgba(16, 185, 129, 0.4);
+}
+
+.code_studio_select {
+    padding: 0.3vmin 0.6vmin;
+    font-size: 1.2vmin;
+    font-family: inherit;
+    background: #1e293b;
+    color: #38ef7d;
+    border: 0.1vmin solid rgba(56, 239, 125, 0.3);
+    border-radius: 0.4vmin;
+    outline: none;
+    cursor: pointer;
+}
+
+.code_studio_main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.code_studio_editor_pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-right: 0.1vmin solid rgba(255, 255, 255, 0.08);
+    position: relative;
+}
+
+.code_studio_textarea {
+    width: 100%;
+    height: 100%;
+    background: #0d1117;
+    color: #58a6ff;
+    font-family: 'Consolas', 'Fira Code', monospace;
+    font-size: 1.4vmin;
+    line-height: 1.5;
+    padding: 1vmin;
+    border: none;
+    outline: none;
+    resize: none;
+    white-space: pre;
+    overflow-wrap: normal;
+    overflow-x: auto;
+    tab-size: 4;
+}
+
+.code_studio_preview_pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    position: relative;
+}
+
+.code_studio_preview_iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #ffffff;
+}
+
+.code_studio_console {
+    height: 9vmin;
+    background: #080c10;
+    border-top: 0.1vmin solid rgba(255, 255, 255, 0.1);
+    color: #38ef7d;
+    font-size: 1.2vmin;
+    padding: 0.5vmin 1vmin;
+    overflow-y: auto;
+    font-family: 'Consolas', monospace;
+}
+
+.code_studio_console_title {
+    color: #94a3b8;
+    font-size: 1vmin;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.2vmin;
+    user-select: none;
+}

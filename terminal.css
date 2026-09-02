@@ -1,0 +1,94 @@
+/* CoderOS Dev Terminal Styling */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.terminal_window {
+    display: none;
+    resize: both;
+    width: 60vmin;
+    height: 35vmin;
+    min-width: 40vmin;
+    min-height: 25vmin;
+    background: rgba(10, 15, 24, 0.85);
+    border: 0.1vmin solid rgba(56, 239, 125, 0.3);
+    box-shadow: 0 0 2vmin rgba(0, 0, 0, 0.5), inset 0 0 1vmin rgba(56, 239, 125, 0.05);
+}
+
+.terminal_window_content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100% - 3.5vmin);
+    overflow-y: auto;
+    padding: 1vmin;
+    font-family: 'Consolas', 'Fira Code', 'Courier New', monospace;
+    font-size: 1.35vmin;
+    line-height: 1.5;
+    color: #e2e8f0;
+    background: transparent;
+}
+
+.terminal_window_content p {
+    margin: 0.2vmin 0;
+    word-break: break-word;
+}
+
+.terminal_prompt {
+    color: #38ef7d;
+    font-weight: bold;
+    user-select: none;
+    margin-right: 0.5vmin;
+}
+
+.terminal_input_line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin-top: 0.2vmin;
+}
+
+.input_label {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+.terminal_input {
+    flex: 1;
+    background: transparent;
+    outline: none;
+    border: none;
+    color: #00f2fe;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.terminal_highlight {
+    color: #00f2fe;
+    font-weight: 600;
+}
+
+.terminal_success {
+    color: #38ef7d;
+}
+
+.terminal_warning {
+    color: #ffd54f;
+}
+
+.terminal_error {
+    color: #f87171;
+}
+
+.terminal_ascii {
+    color: #00f2fe;
+    white-space: pre;
+    font-size: 1.1vmin;
+    line-height: 1.15;
+    margin: 0.5vmin 0;
+}
