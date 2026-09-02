@@ -423,10 +423,66 @@ body[data-theme="dracula"] {
     border-color: rgba(255, 255, 255, 0.3);
 }
 
-.top_bar_search_menu_icon {
-    height: 80%;
-    aspect-ratio: 1 / 1;
-    filter: brightness(0) invert(1);
+.top_bar_left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.top_bar_brand_btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 3px 12px;
+    height: 28px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.top_bar_brand_btn:hover {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: #38bdf8;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+}
+
+.top_bar_coder_logo {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.6));
+}
+
+.top_bar_brand_name {
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    background: linear-gradient(90deg, #38bdf8, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+}
+
+.top_bar_apple_menus {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.top_bar_menu_item {
+    font-size: 13px;
+    color: #cbd5e1;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.15s ease;
+    user-select: none;
+}
+
+.top_bar_menu_item:hover {
+    color: #38bdf8;
 }
 
 .menu_buttons {
@@ -514,14 +570,15 @@ body[data-theme="dracula"] {
 }
 
 .app_icon_svg {
-    width: 76%;
+    width: 80%;
     aspect-ratio: 1 / 1;
-    filter: brightness(0) invert(1);
-    transition: transform 0.2s ease;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s ease;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.45));
 }
 
 .app_icon:hover .app_icon_svg {
-    transform: scale(1.05);
+    transform: scale(1.1);
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.6));
 }
 
 @keyframes iconPop {
@@ -747,17 +804,38 @@ body[data-theme="dracula"] {
     opacity: 1;
 }
 
-.header_title {
+.header_title_wrapper {
     position: absolute;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    max-width: 70%;
+    pointer-events: none;
+    user-select: none;
+}
+
+.header_app_logo {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+.header_title {
+    position: static;
+    transform: none;
+    top: auto;
+    left: auto;
 
     margin: 0;
     padding: 0;
     line-height: 1;
 
-    max-width: 70%;
     font-size: 13.5px;
     font-weight: 600;
     letter-spacing: 0.02em;

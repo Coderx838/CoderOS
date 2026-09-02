@@ -1,23 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
   <defs>
-    <linearGradient id="coder-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00f2fe" />
-      <stop offset="100%" stop-color="#4facfe" />
+    <linearGradient id="cos-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0f19" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
     </linearGradient>
-    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0f172a" />
-      <stop offset="100%" stop-color="#1e293b" />
+    <linearGradient id="cos-border" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#a855f7" />
     </linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00f2fe" flood-opacity="0.5"/>
+    <linearGradient id="cos-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="cos-purple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#7c3aed" />
+    </linearGradient>
+    <linearGradient id="cos-green" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <filter id="cos-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
   </defs>
-  <!-- Background squircle -->
-  <rect x="6" y="6" width="88" height="88" rx="22" fill="url(#bg-grad)" stroke="url(#coder-grad)" stroke-width="3.5" filter="url(#glow)"/>
-  <!-- Left Bracket < -->
-  <path d="M 36 34 L 22 50 L 36 66" fill="none" stroke="url(#coder-grad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Right Bracket > -->
-  <path d="M 64 34 L 78 50 L 64 66" fill="none" stroke="url(#coder-grad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Outer Glass Squircle -->
+  <rect x="8" y="8" width="112" height="112" rx="28" fill="url(#cos-bg)" stroke="url(#cos-border)" stroke-width="3" />
+
+  <!-- Subtle Inner Ring -->
+  <rect x="14" y="14" width="100" height="100" rx="22" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" />
+
+  <!-- Code Chevron Left < -->
+  <path d="M 44 42 L 28 64 L 44 86" fill="none" stroke="url(#cos-cyan)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#cos-glow)" />
+
+  <!-- Code Chevron Right > -->
+  <path d="M 84 42 L 100 64 L 84 86" fill="none" stroke="url(#cos-purple)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#cos-glow)" />
+
   <!-- Center Slash / -->
-  <line x1="56" y1="32" x2="44" y2="68" stroke="#38ef7d" stroke-width="5.5" stroke-linecap="round"/>
+  <line x1="72" y1="36" x2="56" y2="92" stroke="url(#cos-green)" stroke-width="7" stroke-linecap="round" filter="url(#cos-glow)" />
+
+  <!-- Center Core Terminal Prompt Indicator Dot -->
+  <circle cx="64" cy="64" r="3" fill="#ffffff" opacity="0.9" />
 </svg>

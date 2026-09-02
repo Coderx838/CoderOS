@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
+  <defs>
+    <linearGradient id="stn-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18182b" />
+      <stop offset="100%" stop-color="#0a0a14" />
+    </linearGradient>
+    <linearGradient id="stn-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899" />
+      <stop offset="50%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+  </defs>
+  <!-- Squircle Base -->
+  <rect x="8" y="8" width="112" height="112" rx="28" fill="url(#stn-bg)" stroke="url(#stn-grad)" stroke-width="3" />
+  
+  <!-- Station Base Platform -->
+  <path d="M 28 88 L 100 88 L 88 100 L 40 100 Z" fill="url(#stn-grad)" opacity="0.4" />
+
+  <!-- Monitor/Dashboard Frame -->
+  <rect x="24" y="26" width="80" height="54" rx="10" fill="none" stroke="url(#stn-grad)" stroke-width="4" />
+  
+  <!-- Stand -->
+  <path d="M 58 80 L 54 92 L 74 92 L 70 80 Z" fill="url(#stn-grad)" />
+  
+  <!-- Station Inner Crest (Pulse / Code) -->
+  <polyline points="36,54 48,54 54,42 62,66 70,48 76,54 92,54" fill="none" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Status Orb -->
+  <circle cx="64" cy="18" r="4" fill="#34d399" />
+</svg>

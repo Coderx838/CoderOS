@@ -1,22 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Generator: Adobe Illustrator 25.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="512" height="512">
-<g>
-	<path d="M394.667,64H266.496c-1.723-0.008-3.419-0.425-4.949-1.216L198.72,29.867c-10.698-5.6-22.592-8.528-34.667-8.533h-46.72   C52.561,21.404,0.071,73.895,0,138.667v234.667c0.071,64.772,52.561,117.263,117.333,117.333h277.333   c64.772-0.071,117.263-52.561,117.333-117.333v-192C511.929,116.561,459.439,64.071,394.667,64z M448,373.333   c0,29.455-23.878,53.333-53.333,53.333H117.333C87.878,426.667,64,402.789,64,373.333V169.963h382.72   c0.839,3.732,1.268,7.545,1.28,11.371V373.333z"/>
-</g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
+  <defs>
+    <linearGradient id="fold-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+    <linearGradient id="fold-front" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0ea5e9" />
+    </linearGradient>
+    <linearGradient id="fold-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#bae6fd" />
+      <stop offset="100%" stop-color="#7dd3fc" />
+    </linearGradient>
+  </defs>
 
+  <!-- Folder Back Plate -->
+  <path d="M 16 32 C 16 26 20 22 26 22 L 50 22 L 62 34 L 102 34 C 108 34 112 38 112 44 L 112 96 C 112 102 108 106 102 106 L 26 106 C 20 106 16 102 16 96 Z" fill="url(#fold-bg)" />
 
+  <!-- Folder Document Sheet inside -->
+  <rect x="28" y="32" width="72" height="40" rx="4" fill="#ffffff" opacity="0.85" />
+  <line x1="38" y1="44" x2="68" y2="44" stroke="#0284c7" stroke-width="3" stroke-linecap="round" />
+  <line x1="38" y1="52" x2="88" y2="52" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" />
 
-
-
-
-
-
-
-
-
-
-
-
-
+  <!-- Folder Front Pocket -->
+  <path d="M 14 48 C 14 42 18 40 24 40 L 104 40 C 110 40 114 42 114 48 L 110 98 C 110 104 106 108 100 108 L 28 108 C 22 108 18 104 18 98 Z" fill="url(#fold-front)" stroke="url(#fold-glow)" stroke-width="1.5" />
 </svg>

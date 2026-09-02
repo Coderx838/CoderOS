@@ -25,8 +25,9 @@
         <link rel="stylesheet" href="calendar_widget.css">
         <link rel="stylesheet" href="clock_widget.css">
 
-        <title>CoderOS - Developer Web Workstation</title>
-        <link rel="icon" type="image/x-icon" href="Images/Favicon.svg">
+        <title>CoderOS • Developer Workstation</title>
+        <link rel="icon" type="image/svg+xml" href="Images/Favicon.svg">
+        <link rel="alternate icon" href="Images/Favicon.svg">
     </head>
     <body>
         <audio id="typeSound" src="Audio/type.wav" preload="none"></audio>
@@ -82,10 +83,18 @@
         </div>
         <div id="desktop" class="desktop">
             <div class="top_bar" id="topBar">
-                <div class="menu_buttons">
-                    <h2 id="topBarSearchMenuButton" class="top_bar_item clickable no_select" style="cursor: pointer;">
-                        <img class="top_bar_search_menu_icon" src="Images/Favicon.svg" alt="CoderOS">
-                    </h2>
+                <div class="top_bar_left">
+                    <div id="topBarSearchMenuButton" class="top_bar_brand_btn clickable no_select" title="CoderOS Start Menu">
+                        <img class="top_bar_coder_logo" src="Images/Favicon.svg" alt="CoderOS">
+                        <span class="top_bar_brand_name">CoderOS</span>
+                    </div>
+                    <div class="top_bar_apple_menus no_select">
+                        <span class="top_bar_menu_item clickable" onclick="openWindow(codeStudio)">Code</span>
+                        <span class="top_bar_menu_item clickable" onclick="openWindow(terminal)">Terminal</span>
+                        <span class="top_bar_menu_item clickable" onclick="openWindow(devTools)">DevTools</span>
+                        <span class="top_bar_menu_item clickable" onclick="openWindow(files)">Files</span>
+                        <span class="top_bar_menu_item clickable" onclick="openWindow(welcomeScreen)">Station</span>
+                    </div>
                 </div>
                 <div class="top_bar_item clickable" style="cursor: pointer; padding: 0.5vmin" id="controlWidgetButton">
                     <div class="top_bar_control_widget_icons_container no_select">
@@ -112,7 +121,7 @@
                     <img class="app_icon_svg" src="Images/browser.svg" alt="Browser">
                 </div>
                 <div class="app_icon clickable no_select" data-window="welcomeScreen" title="CoderOS Station">
-                    <img class="app_icon_svg" src="Images/Favicon.svg" alt="Station">
+                    <img class="app_icon_svg" src="Images/station.svg" alt="Station">
                 </div>
                 <div class="app_icon clickable no_select" data-window="notes" title="Notes">
                     <img class="app_icon_svg" src="Images/notes.svg" alt="Notes">
@@ -152,7 +161,10 @@
                             <div id="closeWelcomeScreenWindow" class="close_button clickable no_select"></div>
                             <div id="welcomeScreenMaximizeButton" class="maximize_button clickable no_select"></div>
                         </div>
-                        <h2 class="header_title no_select">CoderOS Station</h2>
+                        <div class="header_title_wrapper">
+                            <img class="header_app_logo" src="Images/station.svg" alt="Station">
+                            <h2 class="header_title no_select">CoderOS Station</h2>
+                        </div>
                     </div>
                     <div id="welcomeScreenContent" class="window_content" style="display: flex; flex-direction: row;">
                         <div class="welcome_window_sidebar">
@@ -169,7 +181,10 @@
                             <div id="closeCodeStudioWindow" class="close_button clickable no_select"></div>
                             <div id="codeStudioMaximizeButton" class="maximize_button clickable no_select"></div>
                         </div>
-                        <h2 class="header_title no_select">Code Studio IDE</h2>
+                        <div class="header_title_wrapper">
+                            <img class="header_app_logo" src="Images/code_editor.svg" alt="Code Studio">
+                            <h2 class="header_title no_select">Code Studio IDE</h2>
+                        </div>
                     </div>
                     <div id="codeStudioContent" class="window_content code_studio_content">
                         <div class="code_studio_toolbar">
@@ -225,7 +240,10 @@
                             <div id="closeDevToolsWindow" class="close_button clickable no_select"></div>
                             <div id="devToolsMaximizeButton" class="maximize_button clickable no_select"></div>
                         </div>
-                        <h2 class="header_title no_select">Dev Tools Suite</h2>
+                        <div class="header_title_wrapper">
+                            <img class="header_app_logo" src="Images/dev_tools.svg" alt="Dev Tools">
+                            <h2 class="header_title no_select">Dev Tools Suite</h2>
+                        </div>
                     </div>
                     <div id="devToolsContent" class="window_content dev_tools_content">
                         <div class="dev_tools_sidebar">
@@ -394,7 +412,10 @@
                             <div id="closeTerminalWindow" class="close_button clickable no_select"></div>
                             <div id="terminalMaximizeButton" class="maximize_button clickable no_select"></div>
                         </div>
-                        <h2 class="header_title no_select">Terminal</h2>
+                        <div class="header_title_wrapper">
+                            <img class="header_app_logo" src="Images/terminal.svg" alt="Terminal">
+                            <h2 class="header_title no_select">Terminal</h2>
+                        </div>
                         <div class="terminal_header_tools">
                             <button class="term_tool_btn" onclick="termZoomOut()" title="Decrease font size">A-</button>
                             <button class="term_tool_btn" onclick="termZoomReset()" title="Reset font size">14px</button>
@@ -452,7 +473,10 @@
                         <div class="header_buttons">
                             <div id="closeMusicPlayerWindow" class="close_button clickable no_select"></div>
                         </div>
-                        <h2 class="header_title no_select">YouTube Music &amp; Radio</h2>
+                        <div class="header_title_wrapper">
+                            <img class="header_app_logo" src="Images/music_player.svg" alt="Music">
+                            <h2 class="header_title no_select">YouTube Music &amp; Radio</h2>
+                        </div>
                     </div>
                     <div id="musicPlayerContent" class="music_player_content hide_scrollbar">
                         <!-- Navigation tabs -->
@@ -633,7 +657,10 @@
                             <div id="closeBrowserWindow" class="close_button clickable no_select"></div>
                             <div id="browserMaximizeButton" class="maximize_button clickable no_select"></div>
                         </div>
-                        <h2 class="header_title no_select">Browser</h2>
+                        <div class="header_title_wrapper">
+                            <img class="header_app_logo" src="Images/browser.svg" alt="Browser">
+                            <h2 class="header_title no_select">Browser</h2>
+                        </div>
                     </div>
                     <div id="browserContent" class="browser_content">
                         <div class="browser_top_bar">
@@ -651,7 +678,10 @@
                             <div id="closeFilesWindow" class="close_button clickable no_select"></div>
                             <div id="filesMaximizeButton" class="maximize_button clickable no_select"></div>
                         </div>
-                        <h2 class="header_title no_select">Files</h2>
+                        <div class="header_title_wrapper">
+                            <img class="header_app_logo" src="Images/folder_bold.svg" alt="Files">
+                            <h2 class="header_title no_select">File Explorer</h2>
+                        </div>
                     </div>
                     <div id="filesContent" class="files_content">
                         <div class="files_top_bar">
