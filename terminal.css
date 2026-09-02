@@ -31,23 +31,38 @@
     color: #e2e8f0;
     background: transparent;
     cursor: text;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
 }
 
+/* Real macOS Floating Overlay Scrollbar */
 .terminal_window_content::-webkit-scrollbar {
     width: 8px;
+    background: transparent;
 }
 
 .terminal_window_content::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.2);
+    background: transparent;
 }
 
 .terminal_window_content::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.16);
-    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.22);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: background-color 0.2s ease;
 }
 
 .terminal_window_content::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.45);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.terminal_window_content::-webkit-scrollbar-thumb:active {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 2px solid transparent;
+    background-clip: padding-box;
 }
 
 .terminal_window_content p {
