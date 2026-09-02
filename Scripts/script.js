@@ -229,16 +229,32 @@ window.addEventListener("resize", function () {
 });
 
 function updateTopBarVisibility() {
-    const anyMaximizedAndOpen = Array.from(document.querySelectorAll(".window.window_maximized")).some(win => win.style.display !== "none");
+    const anyMaximizedAndOpen = Array.from(document.querySelectorAll(".window.window_maximized")).some(win => win.style.display !== "none" && !win.classList.contains("window_closed"));
     topBar.style.display = anyMaximizedAndOpen ? "none" : "flex";
 }
 
 function updateIconsVisibility() {
-    if (hideIconBarWhenMaximized) {
-        const anyMaximizedAndOpen = Array.from(document.querySelectorAll(".window.window_maximized")).some(win => win.style.display !== "none");
-        appIconsBar.style.display = anyMaximizedAndOpen ? "none" : "flex";
+    const anyMaximizedAndOpen = Array.from(document.querySelectorAll(".window.window_maximized")).some(win => win.style.display !== "none" && !win.classList.contains("window_closed"));
+    if (appIconsBar) {
+        if (anyMaximizedAndOpen) {
+            appIconsBar.classList.add("dock_hidden");
+        } else {
+            appIconsBar.classList.remove("dock_hidden");
+        }
     }
 }
+
+// Mac-style dock auto-peek when mouse touches bottom edge in maximized mode
+document.addEventListener("mousemove", function (e) {
+    const anyMaximizedAndOpen = Array.from(document.querySelectorAll(".window.window_maximized")).some(win => win.style.display !== "none" && !win.classList.contains("window_closed"));
+    if (anyMaximizedAndOpen && appIconsBar) {
+        if (e.clientY >= window.innerHeight - 15 || appIconsBar.matches(":hover")) {
+            appIconsBar.classList.remove("dock_hidden");
+        } else {
+            appIconsBar.classList.add("dock_hidden");
+        }
+    }
+});
 
 //open and close windows
 function closeWindow(element) {
@@ -248,6 +264,7 @@ function closeWindow(element) {
     setTimeout(function () {
         element.style.display = "none";
         updateTopBarVisibility();
+        updateIconsVisibility();
         updateDockIndicators();
         if (element.id === "terminal" && typeof terminalOpenClose === "function") {
             terminalOpenClose();
@@ -297,6 +314,7 @@ function openWindow(element) {
         terminalOpenClose();
     }
     updateTopBarVisibility();
+    updateIconsVisibility();
     updateDockIndicators();
 }
 
